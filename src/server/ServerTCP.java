@@ -24,7 +24,7 @@ public class ServerTCP implements Runnable {
     @Override
     public void run() {
         synchronized (this) {
-            this.runningThread = Thread.currentThread();
+            runningThread = Thread.currentThread();
         }
         openServerSocket();
 
@@ -43,7 +43,7 @@ public class ServerTCP implements Runnable {
                 }
                 throw new RuntimeException("Error accepting client connection!", e);
             }
-            new Thread(new WorkerRunnable(clientSocket, "test")).start();
+            new Thread(new WorkerRunnable(clientSocket)).start();
         }
         System.out.println("Server stopped!");
     }

@@ -1,10 +1,11 @@
 package server;
 
-import model.Owner;
 import model.ServerQuery;
 import model.ServerResult;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.*;
 
@@ -16,31 +17,27 @@ public class WorkerRunnable implements Runnable {
     private ObjectInputStream inputStream = null;
     private ObjectOutputStream outputStream = null;
     private Connection connection = null;
-    private String sServer = null;
+    private String sIP = null;
 
-    public WorkerRunnable(Socket clientSocket, String server) {
+    public WorkerRunnable(Socket clientSocket) {
         this.clientSocket = clientSocket;
-        this.sServer   = server;
+        sIP = clientSocket.getInetAddress().getHostAddress();
     }
 
     public void run() {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ignored) {}
-
-        try {
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            ServerResult result;
 
-            while (processResult(processQuery((ServerQuery) inputStream.readObject()), clientSocket)) {}
+            do {
+                result = processResult(processQuery((ServerQuery) inputStream.readObject()));
+
+                if (result != null) {
+                }
+            } while (result != null);
             inputStream.close();
             outputStream.close();
-//            ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream());
-//            ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
-
-//            processResult(processQuery((ServerQuery) input.readObject()), clientSocket);
-//            output.close();
-//            input.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,8 +50,10 @@ public class WorkerRunnable implements Runnable {
         } else {
             String method = query.getMethodName();
 
+            System.out.println(query.getMySQLCondition());
+
             if (method.equalsIgnoreCase("disconnect")) {
-                System.out.println("Disconnecting...");
+                System.out.println("Disconnecting (" + sIP + ")...");
                 return ServerResult.create(0, "disconnect");
             }
 
@@ -64,31 +63,29 @@ public class WorkerRunnable implements Runnable {
             }
 
             if (method.equalsIgnoreCase("get")) {
-                get(query.getTableName());
+                get(query);
             }
         }
         return null;
     }
 
-    private boolean processResult(ServerResult result, Socket clientSocket) throws IOException {
-//        ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-
+    private ServerResult processResult(ServerResult result) throws IOException {
         if (result == null) {
-//            outputStream.writeObject(ServerResult.create(666, "Unexpected error!"));
+//            EMPTY RESULT
         } else if (result.getResult() != 0) {
-
+//            ERROR
         } else {
             if (result.getMessage().equalsIgnoreCase("disconnect")) {
-//                outputStream.close();
-                return false;
+                return null;
             }
         }
-//        outputStream.close();
-        return true;
+        return result;
     }
 
     private boolean openDBConnection() {
         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/ced",
                     "root",
@@ -96,14 +93,15 @@ public class WorkerRunnable implements Runnable {
             );
 
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    private ServerResult get(String table) {
+    private ServerResult get(ServerQuery query) {
         try {
+            String table = query.getTableName();
 
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement();

@@ -10,6 +10,7 @@ import model.ServerQuery;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 
 /**
  * Created by shrralis on 2/19/17.
@@ -36,7 +37,15 @@ public class ClientTCP extends Application {
         btn.setOnMouseClicked(event -> {
             if (clientSocket != null) {
                 try {
-                    outputStream.writeObject(ServerQuery.create("test", "get", null));
+                    HashMap<String, Object> params = new HashMap<>();
+                    ServerQuery query = ServerQuery.create("test", "get", null, params);
+                    HashMap<String, Object> or = new HashMap<String, Object>();
+                    or.put("lolka", 3);
+                    or.put("lolka1", 3.1);
+
+                    params.put("test", "tost");
+                    params.put("arr", or);
+                    outputStream.writeObject(ServerQuery.create("test", "get", null, params));
                 } catch (IOException ignored) {}
             }
         });
@@ -54,7 +63,7 @@ public class ClientTCP extends Application {
             if (clientSocket != null) {
                 try {
                     if (outputStream != null) {
-                        outputStream.writeObject(ServerQuery.create(null, "disconnect", null));
+                        outputStream.writeObject(ServerQuery.create(null, "disconnect", null, null));
                         outputStream.close();
                     }
                 } catch (IOException ignored) {}
