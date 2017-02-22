@@ -10,11 +10,11 @@ public class BatteryType extends Owner {
     @SuppressWarnings("unused")
     public BatteryType() {}
 
-    public BatteryType(ResultSet from) throws SQLException {
+    public BatteryType(ResultSet from) {
         parse(from);
     }
     @Override
-    public BatteryType parse(ResultSet from) throws SQLException {
+    public BatteryType parse(ResultSet from) {
         super.parse(from);
         return this;
     }

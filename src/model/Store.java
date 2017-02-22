@@ -11,15 +11,16 @@ public class Store extends Owner {
     @SuppressWarnings("unused")
     public Store() {}
 
-    public Store(ResultSet from) throws SQLException {
+    public Store(ResultSet from) {
         parse(from);
     }
     @Override
-    public Store parse(ResultSet from) throws SQLException {
+    public Store parse(ResultSet from) {
         super.parse(from);
 
-        link = from.getString("link");
-
+        try {
+            link = from.getString("link");
+        } catch (SQLException ignored) {}
         return this;
     }
 }

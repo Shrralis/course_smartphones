@@ -9,26 +9,26 @@ import java.sql.SQLException;
  * Created by shrralis on 2/19/17.
  */
 public class Owner extends Model implements Identifiable {
-    public int id;
+    public int id = 0;
 
-    public String name;
+    public String name = null;
 
     /**
      * Creates an owner with empty ID.
      */
     public Owner() {}
 
-    public Owner(ResultSet from) throws SQLException {
+    public Owner(ResultSet from) {
         parse(from);
     }
     /**
      * Fills an owner from JSONObject
      */
-    public Owner parse(ResultSet from) throws SQLException {
-        fields = from;
-        id = from.getInt("id");
-        name = from.getString("name");
-
+    public Owner parse(ResultSet from) {
+        try {
+            id = from.getInt("id");
+            name = from.getString("name");
+        } catch (SQLException ignored) {}
         return this;
     }
     /**

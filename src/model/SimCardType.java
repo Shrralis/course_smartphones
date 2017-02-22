@@ -10,11 +10,11 @@ public class SimCardType extends Owner {
     @SuppressWarnings("unused")
     public SimCardType() {}
 
-    public SimCardType(ResultSet from) throws SQLException {
+    public SimCardType(ResultSet from) {
         parse(from);
     }
     @Override
-    public SimCardType parse(ResultSet from) throws SQLException {
+    public SimCardType parse(ResultSet from) {
         super.parse(from);
         return this;
     }

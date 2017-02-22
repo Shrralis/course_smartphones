@@ -13,16 +13,17 @@ public class Processor extends Owner {
     @SuppressWarnings("unused")
     public Processor() {}
 
-    public Processor(ResultSet from) throws SQLException {
+    public Processor(ResultSet from) {
         parse(from);
     }
     @Override
-    public Processor parse(ResultSet from) throws SQLException {
+    public Processor parse(ResultSet from) {
         super.parse(from);
 
-        cores = from.getInt("cores");
-        frequency = from.getDouble("frequency");
-
+        try {
+            cores = from.getInt("cores");
+            frequency = from.getDouble("frequency");
+        } catch (SQLException ignored) {}
         return this;
     }
 }

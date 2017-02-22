@@ -12,15 +12,16 @@ public class Manufacturer extends Owner {
     @SuppressWarnings("unused")
     public Manufacturer() {}
 
-    public Manufacturer(ResultSet from) throws SQLException {
+    public Manufacturer(ResultSet from) {
         parse(from);
     }
     @Override
-    public Manufacturer parse(ResultSet from) throws SQLException {
+    public Manufacturer parse(ResultSet from) {
         super.parse(from);
 
-        country = from.getString("country");
-
+        try {
+            country = from.getString("country");
+        } catch (SQLException ignored) {}
         return this;
     }
 }

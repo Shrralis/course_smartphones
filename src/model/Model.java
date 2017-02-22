@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -10,8 +11,7 @@ import java.util.HashMap;
  *
  * Created by shrralis on 2/19/17.
  */
-public abstract class Model {
-    public ResultSet fields;
+public abstract class Model implements Serializable {
     /**
      * The model's tag.
      */
@@ -90,19 +90,4 @@ public abstract class Model {
     public Model parse(ResultSet response) throws SQLException {
         return ParseUtils.parseViaReflection(this, response);
     }
-
-
-
-
-    /*void test() {
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM `battery_type`;");
-
-
-        } catch (SQLException e) {
-            System.err.println("SQLException: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }*/
 }

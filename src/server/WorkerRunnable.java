@@ -1,7 +1,6 @@
 package server;
 
-import model.ServerQuery;
-import model.ServerResult;
+import model.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +11,7 @@ import java.sql.*;
 /**
  * Created by shrralis on 2/19/17.
  */
+@SuppressWarnings("unchecked")
 public class WorkerRunnable implements Runnable {
     private Socket clientSocket = null;
     private ObjectInputStream inputStream = null;
@@ -33,7 +33,10 @@ public class WorkerRunnable implements Runnable {
             do {
                 result = processResult(processQuery((ServerQuery) inputStream.readObject()));
 
-                if (result != null) {
+                if (result == null) {
+                    System.out.println("Disconnecting (" + sIP + ")...");
+                } else {
+                    sendAnswer(result);
                 }
             } while (result != null);
             inputStream.close();
@@ -50,10 +53,7 @@ public class WorkerRunnable implements Runnable {
         } else {
             String method = query.getMethodName();
 
-            System.out.println(query.getMySQLCondition());
-
             if (method.equalsIgnoreCase("disconnect")) {
-                System.out.println("Disconnecting (" + sIP + ")...");
                 return ServerResult.create(0, "disconnect");
             }
 
@@ -63,7 +63,7 @@ public class WorkerRunnable implements Runnable {
             }
 
             if (method.equalsIgnoreCase("get")) {
-                get(query);
+                return get(query);
             }
         }
         return null;
@@ -87,7 +87,7 @@ public class WorkerRunnable implements Runnable {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/ced",
+                    "jdbc:mysql://localhost:3306/smartphones",
                     "root",
                     "zolotorig91"
             );
@@ -99,17 +99,33 @@ public class WorkerRunnable implements Runnable {
         }
     }
 
+    private void sendAnswer(ServerResult result) {
+        try {
+            outputStream.writeObject(result);
+        } catch (IOException ignored) {}
+    }
+
     private ServerResult get(ServerQuery query) {
+        ServerResult result = null;
+
         try {
             String table = query.getTableName();
 
             if (connection != null && !connection.isClosed()) {
-                Statement statement = connection.createStatement();
+                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
 
-                if (table.equalsIgnoreCase("model")) {
-
-                } else if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure_)((type)|(material)))|(((sim_card)|(screen)|(battery))(_type)|(memory_card))||(processor)|(store)$")) {
+                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure_)((type)|(material)))" +
+                        "|(((sim_card)|(screen)|(battery))(_type)|(memory_card))|(processor)|(store)|(model)$")) {
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM `" + table + "`;");
+
+                    if (table.equalsIgnoreCase("manufacturer")) {
+                        result = ServerResult.create(new List(resultSet, Manufacturer.class));
+                    }
+
+                    if (table.equalsIgnoreCase("model")) {
+                        result = ServerResult.create(new List(resultSet, SmartphoneModel.class));
+                    }
                 } else {
                     System.out.println("Unknown table (" + table + ") for get()");
                 }
@@ -117,6 +133,6 @@ public class WorkerRunnable implements Runnable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 }

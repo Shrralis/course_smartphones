@@ -10,11 +10,11 @@ public class Standard extends Owner {
     @SuppressWarnings("unused")
     public Standard() {}
 
-    public Standard(ResultSet from) throws SQLException {
+    public Standard(ResultSet from) {
         parse(from);
     }
     @Override
-    public Owner parse(ResultSet from) throws SQLException {
+    public Owner parse(ResultSet from) {
         super.parse(from);
         return this;
     }

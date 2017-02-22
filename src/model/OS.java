@@ -10,11 +10,11 @@ public class OS extends Owner {
     @SuppressWarnings("unused")
     public OS() {}
 
-    public OS(ResultSet from) throws SQLException {
+    public OS(ResultSet from) {
         parse(from);
     }
     @Override
-    public OS parse(ResultSet from) throws SQLException {
+    public OS parse(ResultSet from) {
         super.parse(from);
         return this;
     }

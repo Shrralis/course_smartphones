@@ -54,10 +54,10 @@ public class ServerQuery<T extends Owner> implements Serializable {
                             result += parseOrConditionFromArray((HashMap<String, Object>) mQueryParameters.get(key));
                         }
                     } else {
-                        key = (key.lastIndexOf(".") != -1
+                        String sKey = (key.lastIndexOf(".") != -1
                                 ? key.substring(0, key.lastIndexOf(".") + 1)
                                 : "") + "`" + key.substring(key.indexOf(".") + 1) + "`";
-                        result += (key.matches("^`(exp)(\\s|\\S)*`$") ? mQueryParameters.get(key) : (key +
+                        result += (sKey.matches("^`(exp)(\\s|\\S)*`$") ? mQueryParameters.get(key) : (sKey +
                                 (mQueryParameters.get(key) instanceof Number ? " = " + mQueryParameters.get(key) :
                                         (((String) mQueryParameters.get(key)).matches("^(NOT )?NULL$") ? " IS " +
                                                 mQueryParameters.get(key) : " LIKE '" + mQueryParameters.get(key) + "'"))))
@@ -102,15 +102,12 @@ public class ServerQuery<T extends Owner> implements Serializable {
                     }
                 } else {
                     result += '(';
-                    boolean match = result.matches("^(\\D+)(\\d+)$");
-                    String[] matches = key.split("^(\\D+)(\\d+)$");
-
-                    key = match ? matches[0] : key;
-                    key = (key.lastIndexOf(".") != -1
-                            ? key.substring(0, key.lastIndexOf(".") + 1)
-                            : "") + "`" + key.substring(key.indexOf(".") + 1) + "`";
-                    result += (key.matches("^`(exp)(\\s|\\S)*`$") ? map.get(key) : (key +
-                            (map.get(key) instanceof Number ? " = " +  map.get(key):
+                    String sKey = key.split("(?<=\\D)(?=\\d)")[0];
+                    sKey = (sKey.lastIndexOf(".") != -1
+                            ? sKey.substring(0, sKey.lastIndexOf(".") + 1)
+                            : "") + "`" + sKey.substring(sKey.indexOf(".") + 1) + "`";
+                    result += (sKey.matches("^`(exp)(\\s|\\S)*`$") ? map.get(key) : (sKey +
+                            (map.get(key) instanceof Number ? " = " +  map.get(key) :
                             (((String) map.get(key)).matches("^(NOT )?NULL$") ? " IS " + map.get(key) : " LIKE '"
                                     + map.get(key) + "'")))) + ") OR ";
                 }

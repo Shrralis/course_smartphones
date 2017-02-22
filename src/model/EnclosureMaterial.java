@@ -10,11 +10,11 @@ public class EnclosureMaterial extends Owner {
     @SuppressWarnings("unused")
     public EnclosureMaterial() {}
 
-    public EnclosureMaterial(ResultSet from) throws SQLException {
+    public EnclosureMaterial(ResultSet from) {
         parse(from);
     }
     @Override
-    public EnclosureMaterial parse(ResultSet from) throws SQLException {
+    public EnclosureMaterial parse(ResultSet from) {
         super.parse(from);
         return this;
     }

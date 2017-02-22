@@ -2,37 +2,40 @@ package model;
 
 import com.sun.istack.internal.NotNull;
 
+import java.io.Serializable;
+
 /**
  * Created by shrralis on 2/19/17.
  */
-public class ServerResult<T extends Owner> {
+public class ServerResult implements Serializable {
     private int iResult = 0;
 
-    private String sMessage = null;
+    private String sMessage = "success";
 
-    private T mObject;
+    private List mObjects;
 
     private ServerResult(int result, @NotNull String message) {
         iResult = result;
         sMessage = message;
+        mObjects = null;
     }
 
-    private ServerResult(T object) {
-        if (object != null) {
-            mObject = object;
+    private ServerResult(List objects) {
+        if (objects != null) {
+            mObjects = objects;
             iResult = 0;
         } else {
-            mObject = null;
+            mObjects = null;
             iResult = -1;
         }
     }
 
-    public static <T extends Owner> ServerResult create(int result, @NotNull String message) {
+    public static ServerResult create(int result, @NotNull String message) {
         return new ServerResult(result, message);
     }
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public static <T extends Owner> ServerResult create(T object) {
-        return new ServerResult(object);
+
+    public static ServerResult create(List objects) {
+        return new ServerResult(objects);
     }
 
     public int getResult() {
@@ -43,7 +46,7 @@ public class ServerResult<T extends Owner> {
         return sMessage;
     }
 
-    public T getObject() {
-        return mObject;
+    public List getObjects() {
+        return mObjects;
     }
 }

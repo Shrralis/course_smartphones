@@ -10,11 +10,11 @@ public class ScreenType extends Owner {
     @SuppressWarnings("unused")
     public ScreenType() {}
 
-    public ScreenType(ResultSet from) throws SQLException {
+    public ScreenType(ResultSet from) {
         parse(from);
     }
     @Override
-    public ScreenType parse(ResultSet from) throws SQLException {
+    public ScreenType parse(ResultSet from) {
         super.parse(from);
         return this;
     }
