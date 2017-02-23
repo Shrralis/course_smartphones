@@ -1,20 +1,18 @@
 package client.mainform;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Control;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.*;
 
 import java.io.IOException;
@@ -30,7 +28,6 @@ public class Controller {
     private ObjectOutputStream outputStream = null;
     private ObjectInputStream inputStream = null;
 
-    private Stage stage;
     @FXML
     private TableView<SmartphoneModel> table;
     @FXML
@@ -72,29 +69,46 @@ public class Controller {
     @FXML
     private RadioButton by_camera;
     @FXML
-    private TableColumn manufacturer;
+    private TableColumn<SmartphoneModel, String> manufacturer;
     @FXML
-    private TableColumn standard;
+    private TableColumn<SmartphoneModel, String> standard;
     @FXML
-    private TableColumn os;
+    private TableColumn<SmartphoneModel, String> os;
     @FXML
-    private TableColumn enclosure_type;
+    private TableColumn<SmartphoneModel, String> enclosure_type;
     @FXML
-    private TableColumn enclosure_material;
+    private TableColumn<SmartphoneModel, String> enclosure_material;
     @FXML
-    private TableColumn sim_card_type;
+    private TableColumn<SmartphoneModel, String> sim_type;
     @FXML
-    private TableColumn screen_type;
+    private TableColumn<SmartphoneModel, String> screen_type;
     @FXML
-    private TableColumn battery_type;
+    private TableColumn<SmartphoneModel, String> battery_type;
     @FXML
-    private TableColumn memory_card_type;
+    private TableColumn<SmartphoneModel, String> memory_card_type;
     @FXML
-    private TableColumn processor;
+    private TableColumn<SmartphoneModel, String> processor;
     @FXML
     @SuppressWarnings("unchecked")
     protected void onMouseClickAdd(MouseEvent event) {
-        getAll();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../addform/form_add.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Stage parentStage = ((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+            stage.setTitle("Додати модель");
+            stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event1 -> {
+                parentStage.setIconified(false);
+            });
+            stage.setMinWidth(450);
+            stage.setMaxWidth(450);
+            stage.show();
+            parentStage.setIconified(true);
+        } catch (IOException ignored) {
+            ignored.printStackTrace();
+        }
     }
     @FXML
     protected void onMouseClickEdit(MouseEvent event) {
@@ -108,9 +122,83 @@ public class Controller {
     protected void onMouseClickSearch(MouseEvent event) {
         System.out.println("You clicked Search button and checked search by " + getSearchCheckedType());
     }
-
-    void show(Stage primaryStage, ObjectOutputStream outputStream, ObjectInputStream inputStream) throws IOException {
-//        getAll();
+    @FXML
+    protected void onMouseClickRefresh(MouseEvent event) {
+        clearTable();
+        getAll();
+    }
+    @FXML
+    public void initialize() {
+        manufacturer.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getManufacturer() != null) {
+                return new SimpleStringProperty(param.getValue().getManufacturer().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        standard.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getStandard() != null) {
+                return new SimpleStringProperty(param.getValue().getStandard().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        os.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getOS() != null) {
+                return new SimpleStringProperty(param.getValue().getOS().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        enclosure_type.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getEnclosureType() != null) {
+                return new SimpleStringProperty(param.getValue().getEnclosureType().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        enclosure_material.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getEnclosureMaterial() != null) {
+                return new SimpleStringProperty(param.getValue().getEnclosureMaterial().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        sim_type.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getSimCardType() != null) {
+                return new SimpleStringProperty(param.getValue().getSimCardType().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        screen_type.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getScreenType() != null) {
+                return new SimpleStringProperty(param.getValue().getScreenType().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        battery_type.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getBatteryType() != null) {
+                return new SimpleStringProperty(param.getValue().getBatteryType().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        memory_card_type.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getMemoryCardType() != null) {
+                return new SimpleStringProperty(param.getValue().getMemoryCardType().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
+        processor.setCellValueFactory(param -> {
+            if (param.getValue() != null && param.getValue().getProcessor() != null) {
+                return new SimpleStringProperty(param.getValue().getProcessor().getName());
+            } else {
+                return new SimpleStringProperty("невідомо");
+            }
+        });
     }
 
     public void setOutputStream(ObjectOutputStream outputStream) {
@@ -165,18 +253,7 @@ public class Controller {
         }
     }
 
-    private void getAll() {
-        manufacturer.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SmartphoneModel, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<SmartphoneModel, String> param) {
-                if (param.getValue() != null && param.getValue().manufacturer != null) {
-                    return new SimpleStringProperty(param.getValue().manufacturer.name);
-                } else {
-                    return new SimpleStringProperty("Невідомо");
-                }
-            }
-        });
-
+    protected final void getAll() {
         try {
             ServerQuery query = ServerQuery.create("model", "get", null, null);
 
@@ -187,7 +264,6 @@ public class Controller {
                     ServerResult result = (ServerResult) inputStream.readObject();
 
                     if (result != null && result.getMessage().equalsIgnoreCase("success")) {
-                        System.out.println("size: " + result.getObjects().size());
                         for (SmartphoneModel smartphone :
                                 (List<SmartphoneModel>) result.getObjects()) {
                             if (data != null) {
@@ -197,11 +273,18 @@ public class Controller {
 
                                 table.setItems(data);
                             }
-                            System.out.println(data.get(0).camera);
                         }
                     }
                 }
             }
-        } catch (IOException | ClassNotFoundException ignored) {}
+        } catch (IOException | ClassNotFoundException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    protected final void clearTable() {
+        if (data != null) {
+            data.clear();
+        }
     }
 }

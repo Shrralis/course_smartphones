@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="course_smartphones:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/course_smartphones_jar</output-path>
+  <artifact type="jar" name="course_smartphones_client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/course_smartphones_client_jar</output-path>
     <root id="archive" name="course_smartphones.jar">
       <element id="module-output" name="course_smartphones" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/mysql-connector-java-5.1.40-bin.jar" path-in-jar="/" />

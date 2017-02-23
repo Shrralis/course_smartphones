@@ -41,51 +41,16 @@ public class MainForm extends Application {
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
         }
 
-        if (outputStream == null) {
-            System.err.println("LOH");
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("form_main.fxml"));
+        Parent root = loader.load();
 
-        /*Button btn = new Button();
-
-
-        btn.setText("Say 'Hello World'");
-        btn.setOnMouseClicked(event -> {
-            if (clientSocket != null) {
-                try {
-                    HashMap<String, Object> params = new HashMap<>();
-                    ServerQuery query = ServerQuery.create("model", "get", null, params);
-                    HashMap<String, Object> or = new HashMap<String, Object>();
-                    or.put("lolka", new Integer(3));
-                    or.put("s.lolka1", new Double(3.1));
-
-                    params.put("test", "tost");
-                    params.put("arr", or);
-
-                    if (outputStream != null) {
-                        outputStream.writeObject(query);
-                    }
-
-                    ServerResult result = (ServerResult) inputStream.readObject();
-
-                    if (result != null && result.getMessage().equalsIgnoreCase("success")) {
-                        System.out.println("Size: " + result.getObjects().size());
-
-                        if (result.getObjects().size() > 0) {
-                            System.out.println(((SmartphoneModel) result.getObjects().get(0)).color);
-                        }
-                    }
-                } catch (IOException | ClassNotFoundException ignored) {}
-            }
-        });
-
-        StackPane root = new StackPane();
-
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        ((Controller) loader.getController()).setOutputStream(outputStream);
+        ((Controller) loader.getController()).setInputStream(inputStream);
+        ((Controller) loader.getController()).getAll();
+        primaryStage.setTitle("Каталог смартфонів");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setMinWidth(1050);
+        primaryStage.setMinHeight(560);
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             if (clientSocket != null) {
@@ -96,17 +61,6 @@ public class MainForm extends Application {
                     }
                 } catch (IOException ignored) {}
             }
-        });*/
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("form_main.fxml"));
-        Parent root = loader.load();
-
-        ((Controller) loader.getController()).setOutputStream(outputStream);
-        ((Controller) loader.getController()).setInputStream(inputStream);
-        primaryStage.setTitle("Каталог смартфонів");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setMinWidth(1050);
-        primaryStage.setMinHeight(560);
-        primaryStage.show();
-//        new Controller().show(primaryStage, outputStream, inputStream);
+        });
     }
 }

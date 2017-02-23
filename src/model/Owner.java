@@ -26,6 +26,10 @@ public class Owner extends Model implements Identifiable {
      */
     public Owner parse(ResultSet from) {
         try {
+            if (from.isBeforeFirst()) {
+                from.next();
+            }
+
             id = from.getInt("id");
             name = from.getString("name");
         } catch (SQLException ignored) {}
@@ -40,5 +44,9 @@ public class Owner extends Model implements Identifiable {
     @Override
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

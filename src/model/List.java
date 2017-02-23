@@ -5,6 +5,7 @@ import com.sun.istack.internal.NotNull;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class List<T extends Model & Identifiable> extends Model implements java.
         fill(from, clazz);
     }
 
+    public List(ResultSet from, Class<? extends T> clazz, Connection connection) {
+        fill(from, clazz, connection);
+    }
+
     public List(ResultSet from, Parser<T> creator) {
         fill(from, creator);
     }
@@ -42,6 +47,27 @@ public class List<T extends Model & Identifiable> extends Model implements java.
     public void fill(ResultSet from, Class<? extends T> clazz) {
         if (from != null) {
             fill(from, new ReflectParser<>(clazz));
+        }
+    }
+
+    public void fill(ResultSet from, Class<? extends T> clazz, Connection connection) {
+        if (from != null) {
+            fill(from, new ReflectParser<>(clazz), connection);
+        }
+    }
+
+    public void fill(ResultSet from, Parser<? extends T> creator, Connection connection) {
+        if (from != null) {
+            try {
+                while (from.next()) {
+                    T object = creator.parseObject(from, connection);
+
+                    if (object != null) {
+                        items.add(object);
+                    }
+                }
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -233,6 +259,7 @@ public class List<T extends Model & Identifiable> extends Model implements java.
 
     public interface Parser<D> {
         D parseObject(ResultSet source) throws Exception;
+        D parseObject(ResultSet source, Connection connection) throws Exception;
     }
 
     public final static class ReflectParser<D extends Model> implements Parser<D> {
@@ -242,7 +269,6 @@ public class List<T extends Model & Identifiable> extends Model implements java.
         public ReflectParser(Class<? extends D> clazz) {
             this.clazz = clazz;
         }
-
         @Override
         public D parseObject(ResultSet source) throws Exception {
             try {
@@ -253,6 +279,17 @@ public class List<T extends Model & Identifiable> extends Model implements java.
                 }
             } catch (Exception ignored) {}
             return (D) clazz.newInstance().parse(source);
+        }
+        @Override
+        public D parseObject(ResultSet source, Connection connection) throws Exception {
+            try {
+                Constructor<? extends D> resultSetConstructor = clazz.getConstructor(ResultSet.class, Connection.class);
+
+                if (resultSetConstructor != null) {
+                    return resultSetConstructor.newInstance(source, connection);
+                }
+            } catch (Exception ignored) {}
+            return (D) clazz.newInstance().parse(source, connection);
         }
     }
 

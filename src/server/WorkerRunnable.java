@@ -84,14 +84,15 @@ public class WorkerRunnable implements Runnable {
 
     private boolean openDBConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            if (connection == null || (connection != null && connection.isClosed())) {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/smartphones",
-                    "root",
-                    "zolotorig91"
-            );
-
+                connection = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/smartphones",
+                        "root",
+                        "zolotorig91"
+                );
+            }
             return true;
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
@@ -124,12 +125,13 @@ public class WorkerRunnable implements Runnable {
                     }
 
                     if (table.equalsIgnoreCase("model")) {
-                        result = ServerResult.create(new List(resultSet, SmartphoneModel.class));
+                        result = ServerResult.create(new List(resultSet, SmartphoneModel.class, connection));
                     }
                 } else {
                     System.out.println("Unknown table (" + table + ") for get()");
                 }
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -90,4 +90,13 @@ public abstract class Model implements Serializable {
     public Model parse(ResultSet response) throws SQLException {
         return ParseUtils.parseViaReflection(this, response);
     }
+    /**
+     * Parses object from source.
+     * @param response server API object.
+     * @return this object.
+     * @throws SQLException if any critical error occurred while parsing.
+     */
+    public Model parse(ResultSet response, Connection connection) throws SQLException {
+        return ParseUtils.parseViaReflection(this, response);
+    }
 }
