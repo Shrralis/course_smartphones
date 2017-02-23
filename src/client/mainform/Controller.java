@@ -28,66 +28,36 @@ public class Controller {
     private ObjectOutputStream outputStream = null;
     private ObjectInputStream inputStream = null;
 
-    @FXML
-    private TableView<SmartphoneModel> table;
-    @FXML
-    private RadioButton by_manufacturer;
-    @FXML
-    private RadioButton by_standard;
-    @FXML
-    private RadioButton by_os;
-    @FXML
-    private RadioButton by_os_version;
-    @FXML
-    private RadioButton by_enclosure_type;
-    @FXML
-    private RadioButton by_enclosure_material;
-    @FXML
-    private RadioButton by_sim_amount;
-    @FXML
-    private RadioButton by_sim_type;
-    @FXML
-    private RadioButton by_thickness;
-    @FXML
-    private RadioButton by_weight;
-    @FXML
-    private RadioButton by_color;
-    @FXML
-    private RadioButton by_screen_type;
-    @FXML
-    private RadioButton by_screen_diagonal;
-    @FXML
-    private RadioButton by_screen_resolution;
-    @FXML
-    private RadioButton by_battery_type;
-    @FXML
-    private RadioButton by_battery_capacity;
-    @FXML
-    private RadioButton by_ram;
-    @FXML
-    private RadioButton by_internal_storage;
-    @FXML
-    private RadioButton by_camera;
-    @FXML
-    private TableColumn<SmartphoneModel, String> manufacturer;
-    @FXML
-    private TableColumn<SmartphoneModel, String> standard;
-    @FXML
-    private TableColumn<SmartphoneModel, String> os;
-    @FXML
-    private TableColumn<SmartphoneModel, String> enclosure_type;
-    @FXML
-    private TableColumn<SmartphoneModel, String> enclosure_material;
-    @FXML
-    private TableColumn<SmartphoneModel, String> sim_type;
-    @FXML
-    private TableColumn<SmartphoneModel, String> screen_type;
-    @FXML
-    private TableColumn<SmartphoneModel, String> battery_type;
-    @FXML
-    private TableColumn<SmartphoneModel, String> memory_card_type;
-    @FXML
-    private TableColumn<SmartphoneModel, String> processor;
+    @FXML private TableView<SmartphoneModel> table;
+    @FXML private RadioButton by_manufacturer;
+    @FXML private RadioButton by_standard;
+    @FXML private RadioButton by_os;
+    @FXML private RadioButton by_os_version;
+    @FXML private RadioButton by_enclosure_type;
+    @FXML private RadioButton by_enclosure_material;
+    @FXML private RadioButton by_sim_amount;
+    @FXML private RadioButton by_sim_type;
+    @FXML private RadioButton by_thickness;
+    @FXML private RadioButton by_weight;
+    @FXML private RadioButton by_color;
+    @FXML private RadioButton by_screen_type;
+    @FXML private RadioButton by_screen_diagonal;
+    @FXML private RadioButton by_screen_resolution;
+    @FXML private RadioButton by_battery_type;
+    @FXML private RadioButton by_battery_capacity;
+    @FXML private RadioButton by_ram;
+    @FXML private RadioButton by_internal_storage;
+    @FXML private RadioButton by_camera;
+    @FXML private TableColumn<SmartphoneModel, String> manufacturer;
+    @FXML private TableColumn<SmartphoneModel, String> standard;
+    @FXML private TableColumn<SmartphoneModel, String> os;
+    @FXML private TableColumn<SmartphoneModel, String> enclosure_type;
+    @FXML private TableColumn<SmartphoneModel, String> enclosure_material;
+    @FXML private TableColumn<SmartphoneModel, String> sim_type;
+    @FXML private TableColumn<SmartphoneModel, String> screen_type;
+    @FXML private TableColumn<SmartphoneModel, String> battery_type;
+    @FXML private TableColumn<SmartphoneModel, String> memory_card_type;
+    @FXML private TableColumn<SmartphoneModel, String> processor;
     @FXML
     @SuppressWarnings("unchecked")
     protected void onMouseClickAdd(MouseEvent event) {
@@ -95,7 +65,7 @@ public class Controller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../addform/form_add.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            Stage parentStage = ((Stage) ((Node) event.getSource()).getScene().getWindow());
+            Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             stage.setTitle("Додати модель");
             stage.setScene(new Scene(root));
@@ -103,19 +73,19 @@ public class Controller {
                 parentStage.setIconified(false);
             });
             stage.setMinWidth(450);
+            stage.setMinHeight(700);
             stage.setMaxWidth(450);
+            stage.setMaxHeight(700);
             stage.show();
             parentStage.setIconified(true);
         } catch (IOException ignored) {
             ignored.printStackTrace();
         }
     }
-    @FXML
-    protected void onMouseClickEdit(MouseEvent event) {
+    @FXML protected void onMouseClickEdit(MouseEvent event) {
         System.out.println("You clicked Edit button");
     }
-    @FXML
-    protected void onMouseClickDelete(MouseEvent event) {
+    @FXML protected void onMouseClickDelete(MouseEvent event) {
         System.out.println("You clicked Delete button");
     }
     @FXML

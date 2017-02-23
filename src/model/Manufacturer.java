@@ -7,7 +7,7 @@ import java.sql.SQLException;
  * Created by shrralis on 2/19/17.
  */
 public class Manufacturer extends Owner {
-    String country = null;
+    public String country = null;
 
     @SuppressWarnings("unused")
     public Manufacturer() {}
@@ -23,5 +23,10 @@ public class Manufacturer extends Owner {
             country = from.getString("country");
         } catch (SQLException ignored) {}
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return name != null ? name : "невідомо";
     }
 }
