@@ -18,6 +18,7 @@ import models.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
 
 /**
  * Created by shrralis on 2/23/17.
@@ -48,7 +49,7 @@ public class Controller {
     @FXML private ComboBox<EnclosureType> enclosureType;
     @FXML private ComboBox<EnclosureMaterial> enclosureMaterial;
     @FXML private TextField simAmount;
-    @FXML private ComboBox<SimCardType> simType;
+    @FXML private ComboBox<SimCardType> simCardType;
     @FXML private TextField thickness;
     @FXML private TextField weight;
     @FXML private ComboBox<String> color;
@@ -133,7 +134,7 @@ public class Controller {
         } else if (checkBox == bSimAmount) {
             simAmount.setDisable(!checkBox.isSelected());
         } else if (checkBox == bSimType) {
-            simType.setDisable(!checkBox.isSelected());
+            simCardType.setDisable(!checkBox.isSelected());
         } else if (checkBox == bThickness) {
             thickness.setDisable(!checkBox.isSelected());
         } else if (checkBox == bWeight) {
@@ -182,26 +183,27 @@ public class Controller {
     public void setInputStream(ObjectInputStream inputStream) {
         this.inputStream = inputStream;
 
-        setManufacturers();
-        setStandards();
-        setOSs();
-        setEnclosureTypes();
-        setEnclosureMaterials();
-        setSIMTypes();
+        setSmth(Manufacturer.class);
+        setSmth(Standard.class);
+        setSmth(OS.class);
+        setSmth(EnclosureType.class);
+        setSmth(EnclosureMaterial.class);
+        setSmth(SimCardType.class);
         setColors();
-        setScreenTypes();
-        setBatteryTypes();
-        setMemoryCardTypes();
-        setProcessors();
+        setSmth(ScreenType.class);
+        setSmth(BatteryType.class);
+        setSmth(MemoryCardType.class);
+        setSmth(Processor.class);
     }
 
     public void setOutputStream(ObjectOutputStream outputStream) {
         this.outputStream = outputStream;
     }
     @SuppressWarnings("unchecked")
-    private void setManufacturers() {
-        ServerQuery query = ServerQuery.create("manufacturer", "get", null, null);
-        ObservableList<Manufacturer> manufacturers = FXCollections.observableArrayList();
+    private <T extends Owner> void setSmth(Class<T> clazz) {
+        String tableName = clazz.getSimpleName().toLowerCase();
+        ServerQuery query = ServerQuery.create(tableName, "get", null, null);
+        ObservableList<T> list = FXCollections.observableArrayList();
 
         try {
             if (outputStream != null) {
@@ -211,9 +213,9 @@ public class Controller {
                     ServerResult result = (ServerResult) inputStream.readObject();
 
                     if (result != null && result.getResult() == 0) {
-                        for (Manufacturer manufacturer :
-                                (List<Manufacturer>) result.getObjects()) {
-                            manufacturers.add(manufacturer);
+                        for (T obj :
+                                (List<T>) result.getObjects()) {
+                            list.add(obj);
                         }
                     } else {
                         Alerts.showBadResultAlert();
@@ -224,72 +226,56 @@ public class Controller {
             } else {
                 Alerts.showBadOutputStreamAlert();
             }
-        } catch (IOException | ClassNotFoundException e) {
+
+            for (Field field :
+                    this.getClass().getDeclaredFields()) {
+                if (field.getName().equalsIgnoreCase(tableName)) {
+                    ((ComboBox) field.get(this)).setItems(list);
+                    addObjForCreate(clazz);
+                    return;
+                }
+            }
+        } catch (IOException | ClassNotFoundException | IllegalAccessException e) {
             Alerts.showSomeExceptionAlert(e);
         }
-        manufacturer.setItems(manufacturers);
     }
     @SuppressWarnings("unchecked")
-    private void setStandards() {
-        ServerQuery query = ServerQuery.create("standard", "get", null, null);
-        ObservableList<Standard> standards = FXCollections.observableArrayList();
-
+    private <T extends Owner> void addObjForCreate(Class<T> clazz) {
         try {
-            if (outputStream != null) {
-                outputStream.writeObject(query);
+            String fieldName = clazz.getSimpleName().toLowerCase();
 
-                if (inputStream != null) {
-                    ServerResult result = (ServerResult) inputStream.readObject();
+            for (Field field :
+                    this.getClass().getDeclaredFields()) {
+                if (field.getName().equalsIgnoreCase(fieldName)) {
+                    T objForCreating = clazz.newInstance();
+                    objForCreating.name = "створити...";
 
-                    if (result != null && result.getResult() == 0) {
-                        for (Standard standard :
-                                (List<Standard>) result.getObjects()) {
-                            standards.add(standard);
+                    ((ComboBox) field.get(this)).getItems().add(objForCreating);
+                    ((ComboBox) field.get(this)).valueProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue != null && ((T) newValue).getName() != null) {
+                            if (((T) newValue).getName().equalsIgnoreCase("створити...")) {
+                                System.out.println("Here you should add window for adding new secondary data to db.");
+
+                                ((T) newValue).id++;
+                                ((T) newValue).name = "нове ім'я";
+
+                                addObjForCreate(clazz);
+                            }
                         }
-                    } else {
-                        Alerts.showBadResultAlert();
-                    }
-                } else {
-                    Alerts.showBadInputStreamAlert();
+                    });
+                    return;
                 }
-            } else {
-                Alerts.showBadOutputStreamAlert();
             }
-        } catch (IOException | ClassNotFoundException e) {
-            Alerts.showSomeExceptionAlert(e);
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
         }
-        standard.setItems(standards);
     }
-    @SuppressWarnings("unchecked")
-    private void setOSs() {
-        ServerQuery query = ServerQuery.create("os", "get", null, null);
-        ObservableList<OS> oss = FXCollections.observableArrayList();
 
-        try {
-            if (outputStream != null) {
-                outputStream.writeObject(query);
+    private void setColors() {
+        ObservableList<String> colors = FXCollections.observableArrayList();
 
-                if (inputStream != null) {
-                    ServerResult result = (ServerResult) inputStream.readObject();
-
-                    if (result != null && result.getResult() == 0) {
-                        for (OS os :
-                                (List<OS>) result.getObjects()) {
-                            oss.add(os);
-                        }
-                    } else {
-                        Alerts.showBadResultAlert();
-                    }
-                } else {
-                    Alerts.showBadInputStreamAlert();
-                }
-            } else {
-                Alerts.showBadOutputStreamAlert();
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            Alerts.showSomeExceptionAlert(e);
-        }
-        os.setItems(oss);
+        colors.addAll("білий", "чорний", "жовтий", "зелений", "коричневий", "червоний", "сірий", "голубий", "фіолетовий");
+        color.setItems(colors);
     }
 
     public void setFormType(FormType formType) {
@@ -428,7 +414,7 @@ public class Controller {
             return false;
         }
 
-        if (bSimType.isSelected() && simType.getSelectionModel().getSelectedItem() == null) {
+        if (bSimType.isSelected() && simCardType.getSelectionModel().getSelectedItem() == null) {
             System.err.println("Ви бажаєте провести пошук по типу SIM-картки, але не обрали жодного з них!");
             alert.setContentText("Ви бажаєте провести пошук по типу SIM-картки, але не обрали жодного з них!");
             alert.showAndWait();
@@ -597,7 +583,7 @@ public class Controller {
             return false;
         }
 
-        if (simType.getSelectionModel().getSelectedItem() == null) {
+        if (simCardType.getSelectionModel().getSelectedItem() == null) {
             System.err.println("Ви не обрали тип SIM-картки смартфону!");
             alert.setContentText("Ви не обрали тип SIM-картки смартфону!");
             alert.showAndWait();
@@ -657,7 +643,7 @@ public class Controller {
         modelToProcess.enclosure_type = enclosureType.getValue();
         modelToProcess.enclosure_material = enclosureMaterial.getValue();
         modelToProcess.sim_card_amount = Integer.parseInt(simAmount.getText().trim());
-        modelToProcess.sim_card_type = simType.getValue();
+        modelToProcess.sim_card_type = simCardType.getValue();
         modelToProcess.thickness = Double.parseDouble(thickness.getText().trim());
         modelToProcess.weight = Double.parseDouble(weight.getText().trim());
         modelToProcess.color = color.getValue().trim();

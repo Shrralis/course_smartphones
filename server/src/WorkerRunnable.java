@@ -121,9 +121,10 @@ public class WorkerRunnable implements Runnable {
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_READ_ONLY);
 
-                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure_)((type)|(material)))" +
-                        "|(((sim_card)|(screen)|(battery)|(memory_card))(_type))|(processor)|(store)|(model)$")) {
-                    ResultSet resultSet = statement.executeQuery("SELECT * FROM `" + table + query.getMySQLCondition() + "`;");
+                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
+                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM `" + table.toLowerCase()
+                            + query.getMySQLCondition() + "`;");
 
                     if (table.equalsIgnoreCase("manufacturer")) {
                         result = ServerResult.create(new List(resultSet, Manufacturer.class));
@@ -141,35 +142,35 @@ public class WorkerRunnable implements Runnable {
                         result = ServerResult.create(new List(resultSet, OS.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("enclosureType")) {
                         result = ServerResult.create(new List(resultSet, EnclosureType.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("enclosureMaterial")) {
                         result = ServerResult.create(new List(resultSet, EnclosureMaterial.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("simCardType")) {
                         result = ServerResult.create(new List(resultSet, SimCardType.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("screenType")) {
                         result = ServerResult.create(new List(resultSet, ScreenType.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("batteryType")) {
                         result = ServerResult.create(new List(resultSet, BatteryType.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("memoryCardType")) {
                         result = ServerResult.create(new List(resultSet, MemoryCardType.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("processor")) {
                         result = ServerResult.create(new List(resultSet, Processor.class));
                     }
 
-                    if (table.equalsIgnoreCase("")) {
+                    if (table.equalsIgnoreCase("store")) {
                         result = ServerResult.create(new List(resultSet, Store.class));
                     }
                 } else {

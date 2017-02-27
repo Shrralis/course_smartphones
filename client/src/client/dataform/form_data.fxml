@@ -59,7 +59,7 @@
                         <Label text="Кількість SIM-карток:" GridPane.rowIndex="7" />
                         <TextField fx:id="simAmount" alignment="CENTER" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label text="Тип SIM-картки:" GridPane.rowIndex="8" />
-                        <ComboBox fx:id="simType" promptText="обрати тип SIM..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="simCardType" promptText="обрати тип SIM..." GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label text="Товщина (мм):" GridPane.rowIndex="9" />
                         <TextField fx:id="thickness" alignment="CENTER" promptText="8.96" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <Label text="Вага (г):" GridPane.rowIndex="10" />

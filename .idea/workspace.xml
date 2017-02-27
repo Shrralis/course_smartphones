@@ -6,72 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e54dcf7e-28c1-4c60-86fa-e3c725b003ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/Alerts.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/dataform/Controller.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/mainform/Controller.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/mainform/MainForm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/mainform/form_main.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/models.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/BatteryType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/EnclosureMaterial.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/EnclosureType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Identifiable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/List.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Manufacturer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/MemoryCardType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Model.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/OS.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Owner.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/ParseUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Processor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/ScreenType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/ServerQuery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/ServerResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/SimCardType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Standard.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/Store.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/server.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/course_smartphones_client_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_40_bin.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course_smartphones.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/addform/Controller.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/dataform/form_data.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/mainform/Controller.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/mainform/MainForm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/mainform/form_main.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/BatteryType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/EnclosureMaterial.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/EnclosureType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Identifiable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/List.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Manufacturer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/MemoryCardType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Model.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/OS.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Owner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/ParseUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Processor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/ScreenType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/ServerQuery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/ServerResult.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/SimCardType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/SmartphoneModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Standard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Store.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/mysql-connector-java-5.1.40-bin.jar" afterPath="$PROJECT_DIR$/server/libs/mysql-connector-java-5.1.40-bin.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/ServerTCP.java" afterPath="$PROJECT_DIR$/server/src/ServerTCP.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/server/WorkerRunnable.java" afterPath="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="e54dcf7e-28c1-4c60-86fa-e3c725b003ee" name="Default" comment="ccc">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/addform/form_add.fxml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mysql/smartphones_model.mwb" afterPath="$PROJECT_DIR$/mysql/smartphones_model.mwb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/dataform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/dataform/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/WorkerRunnable.java" afterPath="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,24 +34,13 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/client/dataform/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="194" column="21" lean-forward="false" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="21" />
+            <state relative-caret-position="572">
+              <caret line="258" column="32" lean-forward="false" selection-start-line="258" selection-start-column="32" selection-end-line="258" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7505#7535#0" expanded="true" />
-                <element signature="e#8726#8756#0" expanded="true" />
-                <element signature="e#9903#9933#0" expanded="true" />
+                <element signature="e#7639#7669#0" expanded="true" />
+                <element signature="e#9179#9209#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SmartphoneModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/src/models/SmartphoneModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-609">
-              <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -118,10 +48,10 @@
       <file leaf-file-name="WorkerRunnable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/WorkerRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="124" column="80" lean-forward="false" selection-start-line="124" selection-start-column="80" selection-end-line="124" selection-end-column="80" />
+            <state relative-caret-position="1165">
+              <caret line="126" column="28" lean-forward="false" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
               <folding>
-                <marker date="1488163819000" expanded="true" signature="4280:4337" ph="SELECT * FRO... missingValuemissingValue" />
+                <marker date="1488235078000" expanded="true" signature="4296:4395" ph="SELECT * FRO... missingValuemissingValue" />
               </folding>
             </state>
           </provider>
@@ -186,9 +116,10 @@
         <option value="$PROJECT_DIR$/models/src/models/Owner.java" />
         <option value="$PROJECT_DIR$/client/src/client/mainform/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/mainform/MainForm.java" />
-        <option value="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
-        <option value="$PROJECT_DIR$/client/src/client/dataform/Controller.java" />
         <option value="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" />
+        <option value="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
+        <option value="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" />
+        <option value="$PROJECT_DIR$/client/src/client/dataform/Controller.java" />
       </list>
     </option>
   </component>
@@ -219,7 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -362,6 +292,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
@@ -903,12 +834,21 @@
       <option name="presentableId" value="Default" />
       <updated>1488152764475</updated>
       <workItem from="1488152766496" duration="4782000" />
-      <workItem from="1488157693443" duration="6712000" />
+      <workItem from="1488157693443" duration="6744000" />
+      <workItem from="1488232987106" duration="3588000" />
     </task>
+    <task id="LOCAL-00001" summary="ccc">
+      <created>1488166679500</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1488166679500</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11494000" />
+    <option name="totallyTimeSpent" value="15114000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2814" height="2134" extended-state="0" />
@@ -929,7 +869,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17496392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17604618" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -948,8 +888,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
   </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="ccc" />
+    <option name="LAST_COMMIT_MESSAGE" value="ccc" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -976,9 +925,8 @@
           <caret line="215" column="14" lean-forward="false" selection-start-line="215" selection-start-column="14" selection-end-line="215" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7505#7535#0" expanded="true" />
-            <element signature="e#8726#8756#0" expanded="true" />
-            <element signature="e#9903#9933#0" expanded="true" />
+            <element signature="e#7639#7669#0" expanded="true" />
+            <element signature="e#9179#9209#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -995,7 +943,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,51 +954,26 @@
         <state relative-caret-position="2291">
           <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding>
-            <marker date="1488163819000" expanded="true" signature="4280:4337" ph="SELECT * FRO... missingValuemissingValue" />
+            <marker date="1488235078000" expanded="true" signature="4296:4395" ph="SELECT * FRO... missingValuemissingValue" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/tst2/Test.java" />
     <entry file="file://$PROJECT_DIR$/client/src/tst/Test.java" />
-    <entry file="file://$PROJECT_DIR$/client/src/client/model/BatteryType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/dataform/form_data.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="6" column="98" lean-forward="false" selection-start-line="6" selection-start-column="98" selection-end-line="6" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model/BatteryType.java" />
+    <entry file="file://$PROJECT_DIR$/client/src/client/mainform/form_main.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/mainform/form_main.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="8" column="222" lean-forward="false" selection-start-line="8" selection-start-column="222" selection-end-line="8" selection-end-column="222" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/model/ServerQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="26" column="48" lean-forward="false" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model/ServerQuery.java" />
     <entry file="file://$PROJECT_DIR$/client/src/client/Alerts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1276">
@@ -1057,158 +982,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/BatteryType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureMaterial.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Identifiable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Manufacturer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/MemoryCardType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/OS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Owner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/ParseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Store.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Processor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/ScreenType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/ServerResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/SimCardType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/SmartphoneModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/Standard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/ServerQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/model/BatteryType.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureMaterial.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureType.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Identifiable.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/List.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Manufacturer.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/MemoryCardType.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Model.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/OS.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Owner.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/ParseUtils.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Store.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Processor.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/ScreenType.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/ServerResult.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/SimCardType.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/SmartphoneModel.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/Standard.java" />
+    <entry file="file://$PROJECT_DIR$/server/src/model/ServerQuery.java" />
     <entry file="file://$PROJECT_DIR$/models/src/models/Store.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1349,33 +1141,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/SmartphoneModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="62" column="11" lean-forward="false" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/WorkerRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="124" column="80" lean-forward="false" selection-start-line="124" selection-start-column="80" selection-end-line="124" selection-end-column="80" />
+        <state relative-caret-position="1165">
+          <caret line="126" column="28" lean-forward="false" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
           <folding>
-            <marker date="1488163819000" expanded="true" signature="4280:4337" ph="SELECT * FRO... missingValuemissingValue" />
+            <marker date="1488235078000" expanded="true" signature="4296:4395" ph="SELECT * FRO... missingValuemissingValue" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/SmartphoneModel.java">
+    <entry file="file://$PROJECT_DIR$/client/src/client/dataform/form_data.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-609">
-          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="35" />
+        <state relative-caret-position="812">
+          <caret line="45" column="87" lean-forward="false" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/client/dataform/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="194" column="21" lean-forward="false" selection-start-line="194" selection-start-column="21" selection-end-line="194" selection-end-column="21" />
+        <state relative-caret-position="572">
+          <caret line="258" column="32" lean-forward="false" selection-start-line="258" selection-start-column="32" selection-end-line="258" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7505#7535#0" expanded="true" />
-            <element signature="e#8726#8756#0" expanded="true" />
-            <element signature="e#9903#9933#0" expanded="true" />
+            <element signature="e#7639#7669#0" expanded="true" />
+            <element signature="e#9179#9209#0" expanded="true" />
           </folding>
         </state>
       </provider>
