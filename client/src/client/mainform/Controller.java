@@ -10,12 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import models.List;
 import models.ServerQuery;
 import models.ServerResult;
@@ -40,25 +40,6 @@ public class Controller {
     private ObjectInputStream inputStream = null;
 
     @FXML private TableView<SmartphoneModel> table;
-    @FXML private RadioButton by_manufacturer;
-    @FXML private RadioButton by_standard;
-    @FXML private RadioButton by_os;
-    @FXML private RadioButton by_os_version;
-    @FXML private RadioButton by_enclosure_type;
-    @FXML private RadioButton by_enclosure_material;
-    @FXML private RadioButton by_sim_amount;
-    @FXML private RadioButton by_sim_type;
-    @FXML private RadioButton by_thickness;
-    @FXML private RadioButton by_weight;
-    @FXML private RadioButton by_color;
-    @FXML private RadioButton by_screen_type;
-    @FXML private RadioButton by_screen_diagonal;
-    @FXML private RadioButton by_screen_resolution;
-    @FXML private RadioButton by_battery_type;
-    @FXML private RadioButton by_battery_capacity;
-    @FXML private RadioButton by_ram;
-    @FXML private RadioButton by_internal_storage;
-    @FXML private RadioButton by_camera;
     @FXML private TableColumn<SmartphoneModel, String> manufacturer;
     @FXML private TableColumn<SmartphoneModel, String> standard;
     @FXML private TableColumn<SmartphoneModel, String> os;
@@ -78,7 +59,6 @@ public class Controller {
         System.out.println("You clicked Edit button");
     }
     @FXML protected void onMouseClickDelete(MouseEvent event) {
-
         table.getSelectionModel().getSelectedItem().getId();
     }
     @FXML
@@ -155,7 +135,7 @@ public class Controller {
             if (param.getValue() != null && param.getValue().getMemoryCardType() != null) {
                 return new SimpleStringProperty(param.getValue().getMemoryCardType().getName());
             } else {
-                return new SimpleStringProperty("невідомо");
+                return new SimpleStringProperty("немає");
             }
         });
         processor.setCellValueFactory(param -> {
@@ -177,50 +157,6 @@ public class Controller {
 
     void setOnRefreshButtonClickListener(OnRefreshButtonClickListener listener) {
         onRefreshButtonClickListener = listener;
-    }
-
-    private String getSearchCheckedType() {
-        if (by_manufacturer.isSelected()) {
-            return "manufacturer";
-        } else if (by_standard.isSelected()) {
-            return "standard";
-        } else if (by_os.isSelected()) {
-            return "os";
-        } else if (by_os_version.isSelected()) {
-            return "os_version";
-        } else if (by_enclosure_type.isSelected()) {
-            return "enclosure_type";
-        } else if (by_enclosure_material.isSelected()) {
-            return "enclosure_material";
-        } else if (by_sim_amount.isSelected()) {
-            return "sim_amount";
-        } else if (by_sim_type.isSelected()) {
-            return "sim_type";
-        } else if (by_thickness.isSelected()) {
-            return "thickness";
-        } else if (by_weight.isSelected()) {
-            return "weight";
-        } else if (by_color.isSelected()) {
-            return "color";
-        } else if (by_screen_type.isSelected()) {
-            return "screen_type";
-        } else if (by_screen_diagonal.isSelected()) {
-            return "screen_diagonal";
-        } else if (by_screen_resolution.isSelected()) {
-            return "screen_resolution";
-        } else if (by_battery_type.isSelected()) {
-            return "battery_type";
-        } else if (by_battery_capacity.isSelected()) {
-            return "battery_capacity";
-        } else if (by_ram.isSelected()) {
-            return "ram";
-        } else if (by_internal_storage.isSelected()) {
-            return "internal_storage";
-        } else if (by_camera.isSelected()) {
-            return "camera";
-        } else {
-            return "none";
-        }
     }
 
     void getAll() {
@@ -289,7 +225,8 @@ public class Controller {
             switch (formType) {
                 case Add:
                     title = "Додати модель";
-                    ((client.dataform.Controller) loader.getController()).setOnOKButtonClickListener(() -> {
+
+                    c.setOnOKButtonClickListener(() -> {
                         try {
                             outputStream.writeObject(ServerQuery.create("model", "add", c.getModelToProcess(), null));
 
@@ -298,6 +235,7 @@ public class Controller {
                             if (result != null) {
                                 if (result.getResult() == 0) {
                                     data.add(c.getModelToProcess());
+                                    stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
                                 } else {
                                     System.err.println("Result is not 0, message: " + result.getMessage());
                                 }
@@ -307,11 +245,14 @@ public class Controller {
                         } catch (IOException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
-//                        onMouseClickRefresh(event);
                     });
                     break;
                 case Edit:
                     title = "Редагувати модель";
+
+                    if (model.length > 0 && model[0] != null) {
+                        c.setModelToProcess(model[0]);
+                    }
                     break;
                 case Search:
                     title = "Пошук моделей";
@@ -329,7 +270,7 @@ public class Controller {
             stage.setMaxWidth(width);
             stage.setMaxHeight(1360);
             stage.initStyle(StageStyle.UTILITY);
-            ((client.dataform.Controller) loader.getController()).setFormType(formType);
+            c.setFormType(formType);
             stage.show();
             parentStage.setIconified(true);
         } catch (IOException e) {

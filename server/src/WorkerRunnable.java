@@ -89,11 +89,11 @@ public class WorkerRunnable implements Runnable {
 
     private boolean openDBConnection() {
         try {
-            if (connection == null || (connection != null && connection.isClosed())) {
+            if (connection == null || connection.isClosed()) {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
 
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/smartphones",
+                        "jdbc:mysql://localhost:3306/smartphones?useUnicode=true&characterEncoding=UTF-8",
                         "root",
                         "zolotorig91"
                 );
@@ -194,9 +194,13 @@ public class WorkerRunnable implements Runnable {
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_READ_ONLY);
 
-                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure_)((type)|(material)))" +
-                        "|(((sim_card)|(screen)|(battery))(_type)|(memory_card))|(processor)|(store)|(model)$")) {
-                    if (statement.execute(query.getInsertMySQLQuery())) {
+                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
+                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
+                    int iResult = statement.executeUpdate(query.getInsertMySQLQuery());
+
+                    System.out.println("result: " + iResult);
+
+                    if (iResult >= 0) {
                         result = ServerResult.create(0, "success");
                     } else {
                         result = ServerResult.create(1, "not added");

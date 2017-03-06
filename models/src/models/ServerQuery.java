@@ -120,7 +120,7 @@ public class ServerQuery<T extends Owner> implements Serializable {
         return result;
     }
     public String getInsertMySQLQuery() throws IllegalAccessException {
-        String result = "INSERT INTO " + sTableName + " " + ParseUtils.parseViaReflectionToSQL(mObjectToProcess);
+        String result = "INSERT INTO " + sTableName + " " + ParseUtils.parseViaReflectionToSQL(mObjectToProcess) + ";";
 
         System.out.println(result);
         return result;

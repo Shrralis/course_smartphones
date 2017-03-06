@@ -127,7 +127,7 @@ public class ParseUtils {
         return object;
     }
 
-    public static <T> String parseViaReflectionToSQL(T object) throws IllegalAccessException {
+    static <T> String parseViaReflectionToSQL(T object) throws IllegalAccessException {
         if (object == null) {
             return null;
         }
@@ -178,7 +178,7 @@ public class ParseUtils {
                     result += value;
                 } else {
                     if (fieldType.equals(String.class)) {
-                        result += "\"" + value.toString() + "\"";
+                        result += "'" + value.toString() + "'";
                     } else if (Owner.class.isAssignableFrom(fieldType)) {
                         result += ((Owner) value).getId();
                     }

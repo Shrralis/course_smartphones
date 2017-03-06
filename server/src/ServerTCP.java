@@ -15,7 +15,7 @@ public class ServerTCP implements Runnable {
         new Thread(new ServerTCP(6777)).start();
     }
 
-    public ServerTCP(final int port) {
+    private ServerTCP(final int port) {
         iServerPort = port;
     }
     @Override
@@ -47,9 +47,10 @@ public class ServerTCP implements Runnable {
 
     private void openServerSocket() {
         try {
-            serverSocket = new ServerSocket(iServerPort);
+            serverSocket = new ServerSocket(iServerPort, 256);
 
             System.out.println("Server successfully started!");
+
         } catch (IOException e) {
             throw new RuntimeException("Cannot open port " + iServerPort, e);
         }

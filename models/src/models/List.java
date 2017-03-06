@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * Created by shrralis on 2/22/17.
  */
 @SuppressWarnings({"unchecked", "UnusedDeclaration"})
-public class List<T extends Model & Identifiable> extends Model implements java.util.List<T>, Serializable {
+public class List<T extends Owner> extends Model implements java.util.List<T>, Serializable {
     private final static int NO_COUNT = -1;
 
     private ArrayList<T> items = new ArrayList<>();
