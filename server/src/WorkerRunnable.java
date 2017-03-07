@@ -51,7 +51,7 @@ public class WorkerRunnable implements Runnable {
         } else {
             String method = query.getMethodName();
 
-            System.out.println("Called: " + query.getMethodName() + "(" + query.getTableName() + ") from - "
+            System.out.println("Called: " + query.getMethodName() + "(" + query.getTableName().toLowerCase() + ") from - "
                     + clientSocket.getInetAddress().getHostAddress());
 
             if (method.equalsIgnoreCase("disconnect")) {
@@ -69,6 +69,10 @@ public class WorkerRunnable implements Runnable {
 
             if (method.equalsIgnoreCase("add")) {
                 return add(query);
+            }
+
+            if (method.equalsIgnoreCase("delete")) {
+                return delete(query);
             }
         }
         return null;
@@ -115,7 +119,7 @@ public class WorkerRunnable implements Runnable {
         ServerResult result = null;
 
         try {
-            String table = query.getTableName();
+            String table = query.getTableName().toLowerCase();
 
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -188,7 +192,7 @@ public class WorkerRunnable implements Runnable {
         ServerResult result = null;
 
         try {
-            String table = query.getTableName();
+            String table = query.getTableName().toLowerCase();
 
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -196,12 +200,19 @@ public class WorkerRunnable implements Runnable {
 
                 if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
                         "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
-                    int iResult = statement.executeUpdate(query.getInsertMySQLQuery());
-
-                    System.out.println("result: " + iResult);
+                    int iResult = statement.executeUpdate(query.getInsertMySQLQuery(), Statement.RETURN_GENERATED_KEYS);
 
                     if (iResult >= 0) {
-                        result = ServerResult.create(0, "success");
+                        ResultSet rs = statement.getGeneratedKeys();
+                        int id = 0;
+
+                        if (rs.next()) {
+                            id = rs.getInt(1);
+                        }
+
+                        result = ServerResult.create(
+                                new List(statement.executeQuery("SELECT * FROM " + table + " WHERE `id` = " + id + ";"),
+                                        query.getObjectToProcess().getClass()));
                     } else {
                         result = ServerResult.create(1, "not added");
                     }
@@ -211,6 +222,32 @@ public class WorkerRunnable implements Runnable {
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        return result;
+    }
+
+    private ServerResult delete(ServerQuery query) {
+        ServerResult result = null;
+
+        try {
+            String table = query.getTableName().toLowerCase();
+
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+
+                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
+                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
+                    int iResult = statement.executeUpdate("DELETE FROM " + table + " WHERE `id` = "
+                            + query.getObjectToProcess().getId() + ";");
+
+                    if (iResult >= 0) {
+                        result = ServerResult.create(0, "deleted");
+                    } else {
+                        result = ServerResult.create(1, "not deleted");
+                    }
+                }
+            }
+        } catch (SQLException ignored) {}
         return result;
     }
 }

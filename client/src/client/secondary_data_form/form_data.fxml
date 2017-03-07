@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.secondarydataform.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.secondary_data_form.Controller">
    <children>
       <GridPane VBox.vgrow="ALWAYS">
         <columnConstraints>
@@ -17,7 +17,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="name" GridPane.columnIndex="1" />
             <Label text="Назва:" />
          </children>
          <VBox.margin>
@@ -26,8 +26,8 @@
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" fillHeight="false" spacing="8.0">
          <children>
-            <Button mnemonicParsing="false" text="Відміна" HBox.hgrow="ALWAYS" onMouseClicked="#onMouseClickedCancel" />
-            <Button mnemonicParsing="false" text="OK" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" text="Відміна" HBox.hgrow="ALWAYS" onMouseClicked="#onMouseCancelClick" />
+            <Button mnemonicParsing="false" text="OK" HBox.hgrow="ALWAYS" onMouseClicked="#onMouseOkClick" />
          </children>
          <VBox.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

@@ -1,4 +1,4 @@
-package client.mainform;
+package client.main_form;
 
 import client.Alerts;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,7 +35,7 @@ public class Controller {
     }
 
     private OnRefreshButtonClickListener onRefreshButtonClickListener = null;
-    private ObservableList<SmartphoneModel> data = null;
+    private ObservableList<SmartphoneModel> data = FXCollections.observableArrayList();
     private ObjectOutputStream outputStream = null;
     private ObjectInputStream inputStream = null;
 
@@ -53,17 +53,27 @@ public class Controller {
     @FXML
     @SuppressWarnings("unchecked")
     protected void onMouseClickAdd(MouseEvent event) {
-        openDataForm(client.dataform.Controller.FormType.Add, event);
+        openDataForm(client.data_form.Controller.FormType.Add, event);
     }
     @FXML protected void onMouseClickEdit(MouseEvent event) {
         System.out.println("You clicked Edit button");
     }
     @FXML protected void onMouseClickDelete(MouseEvent event) {
-        table.getSelectionModel().getSelectedItem().getId();
+        SmartphoneModel model = table.getSelectionModel().getSelectedItem();
+
+        try {
+            outputStream.writeObject(ServerQuery.create("model", "delete", model, null));
+
+            ServerResult result = (ServerResult) inputStream.readObject();
+
+            if (result.getResult() == 0) {
+                table.getItems().remove(model);
+            }
+        } catch (IOException | ClassNotFoundException ignored) {}
     }
     @FXML
     protected void onMouseClickSearch(MouseEvent event) {
-        openDataForm(client.dataform.Controller.FormType.Search, event);
+        openDataForm(client.data_form.Controller.FormType.Search, event);
     }
     @FXML
     protected void onMouseClickRefresh(MouseEvent event) {
@@ -208,16 +218,16 @@ public class Controller {
         }
     }
 
-    private void openDataForm(final client.dataform.Controller.FormType formType, final MouseEvent event, final SmartphoneModel... model) {
+    private void openDataForm(final client.data_form.Controller.FormType formType, final MouseEvent event, final SmartphoneModel... model) {
         String title;
         int width = 450;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/dataform/form_data.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/data_form/form_data.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            client.dataform.Controller c = loader.getController();
+            client.data_form.Controller c = loader.getController();
 
             c.setOutputStream(outputStream);
             c.setInputStream(inputStream);
@@ -226,7 +236,7 @@ public class Controller {
                 case Add:
                     title = "Додати модель";
 
-                    c.setOnOKButtonClickListener(() -> {
+                    c.setOnOkButtonClickListener(() -> {
                         try {
                             outputStream.writeObject(ServerQuery.create("model", "add", c.getModelToProcess(), null));
 

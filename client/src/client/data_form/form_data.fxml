@@ -3,10 +3,11 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.dataform.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.data_form.Controller">
    <bottom>
       <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="BOTTOM_CENTER">
          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#onHelpButtonClick" text="?" />
             <Pane maxWidth="+Infinity" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="8.0" />
@@ -15,14 +16,14 @@
                   <Insets />
                </HBox.margin>
             </Pane>
-            <Button cancelButton="true" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedCancel" text="Відміна" HBox.hgrow="NEVER">
+            <Button cancelButton="true" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseCancelClick" text="Відміна" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
             <HBox alignment="CENTER">
                <children>
-                  <Button minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedOK" text="ОК" HBox.hgrow="NEVER">
+                  <Button minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseOkClick" text="ОК" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets left="14.0" />
                      </HBox.margin>
@@ -94,32 +95,32 @@
                         <TextField fx:id="camera" alignment="CENTER" promptText="8 MPx, 4k (FHD 60fps)" GridPane.columnIndex="1" GridPane.rowIndex="24" />
                         <Label text="Передня камера:" GridPane.rowIndex="25" />
                         <TextField fx:id="frontalCamera" alignment="CENTER" promptText="2 MPx. HD" GridPane.columnIndex="1" GridPane.rowIndex="25" />
-                        <CheckBox fx:id="bManufacturer" mnemonicParsing="false" GridPane.columnIndex="2" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bModel" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1"  onAction="#onCheckBoxSelected"/>
-                        <CheckBox fx:id="bStandard" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bOs" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="3" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bOsVersion" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="4" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bEnclosureType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="5" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bEnclosureMaterial" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bSimAmount" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="7" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bSimType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="8" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bThickness" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="9" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bWeight" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="10" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bColor" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="11" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bScreenType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="12" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bScreenDiagonal" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="13" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bScreenResolution" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="14" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bBatteryType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="15" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bBatteryCapacity" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="16" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bRam" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="17" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bInternalStorage" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="18" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bMemoryCardType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="19" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bProcessor" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="20" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bWifi" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="21" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bNfc" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="22" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bBluetooth" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="23" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bCamera" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="24" onAction="#onCheckBoxSelected" />
-                        <CheckBox fx:id="bFrontalCamera" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="25" onAction="#onCheckBoxSelected" />
+                        <CheckBox fx:id="bManufacturer" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" />
+                        <CheckBox fx:id="bModel" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="bStandard" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="bOs" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="bOsVersion" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="bEnclosureType" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="bEnclosureMaterial" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="bSimAmount" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <CheckBox fx:id="bSimType" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <CheckBox fx:id="bThickness" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <CheckBox fx:id="bWeight" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <CheckBox fx:id="bColor" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                        <CheckBox fx:id="bScreenType" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                        <CheckBox fx:id="bScreenDiagonal" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                        <CheckBox fx:id="bScreenResolution" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <CheckBox fx:id="bBatteryType" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                        <CheckBox fx:id="bBatteryCapacity" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                        <CheckBox fx:id="bRam" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                        <CheckBox fx:id="bInternalStorage" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                        <CheckBox fx:id="bMemoryCardType" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="19" />
+                        <CheckBox fx:id="bProcessor" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="20" />
+                        <CheckBox fx:id="bWifi" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="21" />
+                        <CheckBox fx:id="bNfc" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="22" />
+                        <CheckBox fx:id="bBluetooth" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="23" />
+                        <CheckBox fx:id="bCamera" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="24" />
+                        <CheckBox fx:id="bFrontalCamera" mnemonicParsing="false" onAction="#onCheckBoxSelect" GridPane.columnIndex="2" GridPane.rowIndex="25" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />

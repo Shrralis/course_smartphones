@@ -1,4 +1,4 @@
-package client.mainform;
+package client.main_form;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import java.net.Socket;
  * Created by shrralis on 2/19/17.
  */
 public class MainForm extends Application {
-    private FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/mainform/form_main.fxml"));
+    private FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/main_form/form_main.fxml"));
     private Socket clientSocket = null;
     private ObjectOutputStream outputStream = null;
     private ObjectInputStream inputStream = null;

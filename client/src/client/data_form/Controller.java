@@ -1,4 +1,4 @@
-package client.dataform;
+package client.data_form;
 
 import client.Alerts;
 import javafx.collections.FXCollections;
@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,6 +21,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
+import java.util.Optional;
 
 /**
  * Created by shrralis on 2/23/17.
@@ -35,11 +33,11 @@ public class Controller {
         Search
     }
 
-    public interface OnOKButtonClickListener {
-        void onButtonOKClick();
+    public interface OnOkButtonClickListener {
+        void onButtonOkClick();
     }
 
-    private OnOKButtonClickListener onOKButtonClickListener;
+    private OnOkButtonClickListener onOkButtonClickListener = null;
     private int iIsAnythingSelectedForSearch = 0;
     private SmartphoneModel modelToProcess = null;
     private ObjectInputStream inputStream = null;
@@ -98,19 +96,31 @@ public class Controller {
     @FXML private CheckBox bCamera;
     @FXML private CheckBox bFrontalCamera;
     @FXML
-    protected void onMouseClickedOK(MouseEvent event) {
-        if (onOKButtonClickListener != null) {
-            onOKButtonClickListener.onButtonOKClick();
+    protected void onMouseOkClick(MouseEvent event) {
+        if (onOkButtonClickListener != null) {
+            onOkButtonClickListener.onButtonOkClick();
         }
     }
     @FXML
-    protected void onMouseClickedCancel(MouseEvent event) {
+    protected void onMouseCancelClick(MouseEvent event) {
         Stage stage = ((Stage) ((Node) event.getSource()).getScene().getWindow());
 
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
     @FXML
-    protected void onCheckBoxSelected(ActionEvent event) {
+    protected void onHelpButtonClick(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("Довідка");
+        alert.setHeaderText("Додаткова інформація");
+        alert.setContentText("Для видалення вторичних даних (тих, що у випадаючих списках), " +
+                "оберіть те, що бажаєте видалити, затисніть клавішу Shift й натисніть на випадаючому списку.");
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(model.getScene().getWindow());
+        alert.showAndWait();
+    }
+    @FXML
+    protected void onCheckBoxSelect(ActionEvent event) {
         CheckBox checkBox = (CheckBox) event.getSource();
 
         if (checkBox.isSelected()) {
@@ -175,6 +185,51 @@ public class Controller {
             frontalCamera.setDisable(!checkBox.isSelected());
         }
     }
+    @SuppressWarnings("unchecked")
+    @FXML
+    public void initialize() {
+        for (Field field :
+                getClass().getDeclaredFields()) {
+            if (field.getType().getSimpleName().equals("ComboBox") && !field.getName().equals("color")) {
+                try {
+                    ComboBox comboBox = (ComboBox) field.get(this);
+
+                    comboBox.setOnMouseClicked(event -> {
+                        if (event.isShiftDown()) {
+                            Owner value = (Owner) comboBox.getSelectionModel().getSelectedItem();
+
+                            if (value != null) {
+                                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+                                alert.setTitle("Видалення");
+                                alert.setHeaderText("Видалення даних");
+                                alert.setContentText("Ви дійсно хочете видалити " + value.getName() + "?");
+                                alert.initModality(Modality.WINDOW_MODAL);
+                                alert.initOwner(comboBox.getScene().getWindow());
+
+                                Optional<ButtonType> answer = alert.showAndWait();
+
+                                if (answer.get() == ButtonType.OK) {
+                                    try {
+                                        outputStream.writeObject(ServerQuery.create(value.getClass().getSimpleName(),
+                                                "delete", value, null));
+
+                                        ServerResult result = (ServerResult) inputStream.readObject();
+
+                                        if (result.getResult() == 0) {
+                                            comboBox.getItems().remove(value);
+                                            comboBox.getSelectionModel().clearSelection();
+                                        }
+                                    } catch (IOException | ClassNotFoundException ignored) {}
+                                    return;
+                                }
+                            }
+                        }
+                    });
+                } catch (IllegalAccessException ignored) {}
+            }
+        }
+    }
 
     public void setModelToProcess(SmartphoneModel modelToProcess) {
         this.modelToProcess = modelToProcess;
@@ -187,24 +242,24 @@ public class Controller {
     public void setInputStream(ObjectInputStream inputStream) {
         this.inputStream = inputStream;
 
-        setSmth(Manufacturer.class);
-        setSmth(Standard.class);
-        setSmth(OS.class);
-        setSmth(EnclosureType.class);
-        setSmth(EnclosureMaterial.class);
-        setSmth(SimCardType.class);
+        setSomething(Manufacturer.class);
+        setSomething(Standard.class);
+        setSomething(OS.class);
+        setSomething(EnclosureType.class);
+        setSomething(EnclosureMaterial.class);
+        setSomething(SimCardType.class);
         setColors();
-        setSmth(ScreenType.class);
-        setSmth(BatteryType.class);
-        setSmth(MemoryCardType.class);
-        setSmth(Processor.class);
+        setSomething(ScreenType.class);
+        setSomething(BatteryType.class);
+        setSomething(MemoryCardType.class);
+        setSomething(Processor.class);
     }
 
     public void setOutputStream(ObjectOutputStream outputStream) {
         this.outputStream = outputStream;
     }
     @SuppressWarnings("unchecked")
-    private <T extends Owner> void setSmth(Class<T> clazz) {
+    private <T extends Owner> void setSomething(Class<T> clazz) {
         String tableName = clazz.getSimpleName().toLowerCase();
         ServerQuery query = ServerQuery.create(tableName, "get", null, null);
         ObservableList<T> list = FXCollections.observableArrayList();
@@ -217,9 +272,10 @@ public class Controller {
                     ServerResult result = (ServerResult) inputStream.readObject();
 
                     if (result != null && result.getResult() == 0) {
-                        for (T obj :
-                                (List<T>) result.getObjects()) {
-                            list.add(obj);
+                        if (result.getObjects() != null) {
+                            for (T obj : (List<T>) result.getObjects()) {
+                                list.add(obj);
+                            }
                         }
                     } else {
                         Alerts.showBadResultAlert();
@@ -253,9 +309,10 @@ public class Controller {
                 if (field.getName().equalsIgnoreCase(fieldName)) {
                     T objForCreating = clazz.newInstance();
                     objForCreating.name = "створити...";
+                    ComboBox comboBox = ((ComboBox) field.get(this));
 
-                    ((ComboBox) field.get(this)).getItems().add(objForCreating);
-                    ((ComboBox) field.get(this)).valueProperty().addListener((observable, oldValue, newValue) -> {
+                    comboBox.getItems().add(objForCreating);
+                    comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
                         if (newValue != null && ((T) newValue).getName() != null) {
                             if (((T) newValue).getName().equalsIgnoreCase("створити...")) {
                                 if (fieldName.matches("(p|P)rocessor")) {
@@ -268,7 +325,6 @@ public class Controller {
                                     System.out.println("Here you should add window for adding new secondary data to db.");
                                     openSecondaryDataAddForm((T) newValue);
                                 }
-
                                 addObjForCreate(clazz);
                             }
                         }
@@ -292,31 +348,31 @@ public class Controller {
         if (formType == FormType.Search) {
             setAllFieldsDisabled();
 
-            onOKButtonClickListener = () -> {
+            onOkButtonClickListener = () -> {
                 if (isFieldsValidForSearch()) {
 
                 }
             };
         } else if (formType == FormType.Add) {
-            final OnOKButtonClickListener currentListener = onOKButtonClickListener;
-            onOKButtonClickListener = () -> {
+            final OnOkButtonClickListener currentListener = onOkButtonClickListener;
+            onOkButtonClickListener = () -> {
                 if (isFieldsValidForAdd()) {
                     setupModel();
 
                     if (currentListener != null) {
-                        currentListener.onButtonOKClick();
+                        currentListener.onButtonOkClick();
                     }
                 }
             };
         } else {
-            onOKButtonClickListener = () -> {
+            onOkButtonClickListener = () -> {
 
             };
         }
     }
 
-    public void setOnOKButtonClickListener(OnOKButtonClickListener listener) {
-        onOKButtonClickListener = listener;
+    public void setOnOkButtonClickListener(OnOkButtonClickListener listener) {
+        onOkButtonClickListener = listener;
     }
 
     private void setAllFieldsDisabled() {
@@ -350,7 +406,7 @@ public class Controller {
 
     private void setFieldDisabled(CheckBox field) {
         field.setSelected(false);
-        onCheckBoxSelected(new ActionEvent(field, null));
+        onCheckBoxSelect(new ActionEvent(field, null));
     }
 
     private boolean isFieldsValidForSearch() {
@@ -645,34 +701,36 @@ public class Controller {
 
     private void openProcessorAddForm(Processor resultTo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/processordataform/form_data.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/processor_data_form/form_data.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             Stage parentStage = (Stage) wifi.getScene().getWindow();
-            client.processordataform.Controller c = loader.getController();
+            client.processor_data_form.Controller c = loader.getController();
 
-            c.setOnOKButtonClickListener(() -> {
-                try {
-                    outputStream.writeObject(ServerQuery.create("processor", "add", c.getProcessor(), null));
+            c.setOnOkButtonClickListener(() -> {
+                if (c.isFieldsValidForAdd()) {
+                    try {
+                        outputStream.writeObject(ServerQuery.create("processor", "add", c.getProcessor(), null));
 
-                    ServerResult result = (ServerResult) inputStream.readObject();
+                        ServerResult result = (ServerResult) inputStream.readObject();
 
-                    if (result != null) {
-                        if (result.getResult() == 0) {
-                            resultTo.id = ((Processor) result.getObjects().get(0)).id;
-                            resultTo.name = ((Processor) result.getObjects().get(0)).name;
-                            resultTo.cores = ((Processor) result.getObjects().get(0)).cores;
-                            resultTo.frequency = ((Processor) result.getObjects().get(0)).frequency;
+                        if (result != null) {
+                            if (result.getResult() == 0) {
+                                resultTo.id = ((Processor) result.getObjects().get(0)).id;
+                                resultTo.name = ((Processor) result.getObjects().get(0)).name;
+                                resultTo.cores = ((Processor) result.getObjects().get(0)).cores;
+                                resultTo.frequency = ((Processor) result.getObjects().get(0)).frequency;
 
-                            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                            } else {
+                                System.err.println("Result is not 0, message: " + result.getMessage());
+                            }
                         } else {
-                            System.err.println("Result is not 0, message: " + result.getMessage());
+                            System.err.println("RESULT IS null");
                         }
-                    } else {
-                        System.err.println("RESULT IS null");
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
             });
             stage.setTitle("Додати процесор");
@@ -684,38 +742,45 @@ public class Controller {
             stage.setMaxHeight(200);
             stage.initStyle(StageStyle.UTILITY);
             stage.showAndWait();
+
+            if (resultTo.getName().equalsIgnoreCase("створити...")) {
+                processor.getItems().remove(resultTo);
+                processor.getSelectionModel().clearSelection();
+            }
         } catch (IOException ignored) {}
     }
 
     private void openManufacturerAddForm(Manufacturer resultTo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/manufacturerdataform/form_data.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/manufacturer_data_form/form_data.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             Stage parentStage = (Stage) wifi.getScene().getWindow();
-            client.manufacturerdataform.Controller c = loader.getController();
+            client.manufacturer_data_form.Controller c = loader.getController();
 
-            c.setOnOKButtonClickListener(() -> {
-                try {
-                    outputStream.writeObject(ServerQuery.create("manufacturer", "add", c.getManufacturer(), null));
+            c.setOnOkButtonClickListener(() -> {
+                if (c.isFieldsValidForAdd()) {
+                    try {
+                        outputStream.writeObject(ServerQuery.create("manufacturer", "add", c.getManufacturer(), null));
 
-                    ServerResult result = (ServerResult) inputStream.readObject();
+                        ServerResult result = (ServerResult) inputStream.readObject();
 
-                    if (result != null) {
-                        if (result.getResult() == 0) {
-                            resultTo.id = ((Manufacturer) result.getObjects().get(0)).id;
-                            resultTo.name = ((Manufacturer) result.getObjects().get(0)).name;
-                            resultTo.country = ((Manufacturer) result.getObjects().get(0)).country;
+                        if (result != null) {
+                            if (result.getResult() == 0) {
+                                resultTo.id = ((Manufacturer) result.getObjects().get(0)).id;
+                                resultTo.name = ((Manufacturer) result.getObjects().get(0)).name;
+                                resultTo.country = ((Manufacturer) result.getObjects().get(0)).country;
 
-                            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                            } else {
+                                System.err.println("Result is not 0, message: " + result.getMessage());
+                            }
                         } else {
-                            System.err.println("Result is not 0, message: " + result.getMessage());
+                            System.err.println("RESULT IS null");
                         }
-                    } else {
-                        System.err.println("RESULT IS null");
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
             });
             stage.setTitle("Додати виробника");
@@ -727,38 +792,52 @@ public class Controller {
             stage.setMaxHeight(144);
             stage.initStyle(StageStyle.UTILITY);
             stage.showAndWait();
+
+            if (resultTo.getName().equalsIgnoreCase("створити...")) {
+                manufacturer.getItems().remove(resultTo);
+                manufacturer.getSelectionModel().clearSelection();
+            }
         } catch (IOException ignored) {}
     }
-
+    @SuppressWarnings("unchecked")
     private <T extends Owner> void openSecondaryDataAddForm(T resultTo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/secondarydataform/form_data.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/secondary_data_form/form_data.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             Stage parentStage = (Stage) wifi.getScene().getWindow();
-            client.secondarydataform.Controller c = loader.getController();
+            client.secondary_data_form.Controller c = loader.getController();
 
-            c.setOnOKButtonClickListener(() -> {
-                try {
-                    outputStream.writeObject(ServerQuery.create(resultTo.getClass().getSimpleName(), "add",
-                            c.getObjectToAdd(),null));
+            c.setOnOkButtonClickListener(() -> {
+                if (c.isFieldsValidForAdd(resultTo.getClass())) {
+                    try {
+                        outputStream.writeObject(ServerQuery.create(resultTo.getClass().getSimpleName(), "add",
+                                c.getObjectToAdd(), null));
 
-                    ServerResult result = (ServerResult) inputStream.readObject();
+                        ServerResult result = (ServerResult) inputStream.readObject();
 
-                    if (result != null) {
-                        if (result.getResult() == 0) {
-                            resultTo.id = result.getObjects().get(0).id;
-                            resultTo.name = result.getObjects().get(0).name;
+                        if (result != null) {
+                            if (result.getResult() == 0) {
+                                if (resultTo == null) {
+                                    System.out.println(1);
+                                } else if (result.getObjects() == null) {
+                                    System.out.println(2);
+                                } else if (result.getObjects().get(0) == null) {
+                                    System.out.println(3);
+                                }
+                                resultTo.id = result.getObjects().get(0).id;
+                                resultTo.name = result.getObjects().get(0).name;
 
-                            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+                            } else {
+                                System.err.println("Result is not 0, message: " + result.getMessage());
+                            }
                         } else {
-                            System.err.println("Result is not 0, message: " + result.getMessage());
+                            System.err.println("RESULT IS null");
                         }
-                    } else {
-                        System.err.println("RESULT IS null");
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
             });
             stage.setTitle("Додати вторичні дані");
@@ -771,17 +850,19 @@ public class Controller {
             stage.initStyle(StageStyle.UTILITY);
             stage.showAndWait();
 
-            if (resultTo.getName().equalsIgnoreCase("створити...")) {
-                try {
-                    for (Field field :
-                            getClass().getDeclaredFields()) {
-                        if (field.getName().equalsIgnoreCase(resultTo.getClass().getSimpleName())) {
-                            ((ComboBox) field.get(null)).getItems().remove(resultTo);
-                            return;
+            try {
+                for (Field field : getClass().getDeclaredFields()) {
+                    if (field.getName().equalsIgnoreCase(resultTo.getClass().getSimpleName())) {
+                        if (resultTo.getName().equalsIgnoreCase("створити...")) {
+                            ((ComboBox) field.get(this)).getItems().remove(resultTo);
+                            ((ComboBox) field.get(this)).getSelectionModel().clearSelection();
+                        } else {
+                            System.out.println("ololo");
                         }
+                        return;
                     }
-                } catch (IllegalAccessException ignored) {}
-            }
+                }
+            } catch (IllegalAccessException ignored) {}
         } catch (IOException ignored) {}
     }
 }
