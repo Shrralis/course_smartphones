@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class OS extends Owner {
     @SuppressWarnings("unused")
-    public OS() {}
-
+    OS() {}
+    @SuppressWarnings("unused")
     public OS(ResultSet from) {
         parse(from);
     }

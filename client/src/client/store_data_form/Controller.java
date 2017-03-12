@@ -30,7 +30,7 @@ public class Controller {
     @FXML private TextField link;
 
     @FXML
-    protected void onMouseOkClick(MouseEvent event) {
+    protected void onMouseOkClick() {
         if (onOkButtonClickListener != null) {
             onOkButtonClickListener.onButtonOkClick();
         }

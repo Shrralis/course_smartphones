@@ -97,7 +97,7 @@ public class Controller {
     @FXML private CheckBox bCamera;
     @FXML private CheckBox bFrontalCamera;
     @FXML
-    protected void onMouseOkClick(MouseEvent event) {
+    protected void onMouseOkClick() {
         if (onOkButtonClickListener != null) {
             onOkButtonClickListener.onButtonOkClick();
         }
@@ -109,7 +109,7 @@ public class Controller {
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
     @FXML
-    protected void onHelpButtonClick(MouseEvent event) {
+    protected void onHelpButtonClick() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         alert.setTitle("Довідка");
@@ -904,13 +904,6 @@ public class Controller {
 
                         if (result != null) {
                             if (result.getResult() == 0) {
-                                if (resultTo == null) {
-                                    System.out.println(1);
-                                } else if (result.getObjects() == null) {
-                                    System.out.println(2);
-                                } else if (result.getObjects().get(0) == null) {
-                                    System.out.println(3);
-                                }
                                 resultTo.id = result.getObjects().get(0).id;
                                 resultTo.name = result.getObjects().get(0).name;
 

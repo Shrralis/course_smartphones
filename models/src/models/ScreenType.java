@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class ScreenType extends Owner {
     @SuppressWarnings("unused")
-    public ScreenType() {}
-
+    ScreenType() {}
+    @SuppressWarnings("unused")
     public ScreenType(ResultSet from) {
         parse(from);
     }

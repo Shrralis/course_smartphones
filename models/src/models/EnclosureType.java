@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class EnclosureType extends Owner {
     @SuppressWarnings("unused")
-    public EnclosureType() {}
-
+    EnclosureType() {}
+    @SuppressWarnings("unused")
     public EnclosureType(ResultSet from) {
         parse(from);
     }

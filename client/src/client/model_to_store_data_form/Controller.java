@@ -36,7 +36,7 @@ public class Controller {
     @FXML private TextField price;
 
     @FXML
-    protected void onMouseOkClick(MouseEvent event) {
+    protected void onMouseOkClick() {
         if (onOkButtonClickListener != null) {
             onOkButtonClickListener.onButtonOkClick();
         }
@@ -46,10 +46,6 @@ public class Controller {
         Stage stage = ((Stage) ((Node) event.getSource()).getScene().getWindow());
 
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-    }
-
-    public void setModelToStoreToProcess(ModelToStore modelToStoreToProcess) {
-        this.modelToStoreToProcess = modelToStoreToProcess;
     }
 
     public ModelToStore getModelToStoreToProcess() {

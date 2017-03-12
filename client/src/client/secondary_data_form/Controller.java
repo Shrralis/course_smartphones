@@ -25,7 +25,7 @@ public class Controller<T extends Owner> {
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
     @FXML
-    protected void onMouseOkClick(MouseEvent event) {
+    protected void onMouseOkClick() {
         if (onOkButtonClickListener != null) {
             onOkButtonClickListener.onButtonOkClick();
         }

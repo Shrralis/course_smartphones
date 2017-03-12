@@ -69,7 +69,7 @@ public class MainForm extends Application {
             alert.showAndWait();
         }
     }
-
+    @SuppressWarnings("unchecked")
     private void drawForm(Stage primaryStage) {
         Parent root = loader.getRoot();
 

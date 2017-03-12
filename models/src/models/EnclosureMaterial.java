@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class EnclosureMaterial extends Owner {
     @SuppressWarnings("unused")
-    public EnclosureMaterial() {}
-
+    EnclosureMaterial() {}
+    @SuppressWarnings("unused")
     public EnclosureMaterial(ResultSet from) {
         parse(from);
     }

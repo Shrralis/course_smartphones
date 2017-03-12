@@ -209,33 +209,4 @@ public class SmartphoneModel extends Owner {
     public String getFrontal_camera() {
         return frontal_camera;
     }
-
-    public String toOut() {
-        String result = "";
-        result += "manufacturer: " + manufacturer + "\n";
-        result += "model: " + name + "\n";
-        result += "standard: " + standard + "\n";
-        result += "os: " + os + "\n";
-        result += "os_version: " + os_version + "\n";
-        result += "enclosure_type: " + enclosure_type + "\n";
-        result += "material: " + enclosure_material + "\n";
-        result += "sim_amount: " + sim_card_amount + "\n";
-        result += "thickness: " + thickness + "\n";
-        result += "weight: " + weight + "\n";
-        result += "color: " + color + "\n";
-        result += "screen_type: " + screen_type + "\n";
-        result += "screen_diagonal: " + screen_diagonal + "\n";
-        result += "screen_resolution: " + screen_resolution + "\n";
-        result += "battery_type: " + battery_type + "\n";
-        result += "battery_capacity: " + battery_capacity + "\n";
-        result += "ram: " + ram + "\n";
-        result += "internal: " + internal_storage + "\n";
-        result += "mem_card_type: " + memory_card_type + "\n";
-        result += "processor: " + processor + "\n";
-        result += "wifi: " + wifi + "\n";
-        result += "camera: " + camera + "\n";
-        result += "frontal_cam: " + frontal_camera;
-
-        return result;
-    }
 }

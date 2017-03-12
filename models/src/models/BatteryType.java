@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class BatteryType extends Owner {
     @SuppressWarnings("unused")
-    public BatteryType() {}
-
+    BatteryType() {}
+    @SuppressWarnings("unused")
     public BatteryType(ResultSet from) {
         parse(from);
     }

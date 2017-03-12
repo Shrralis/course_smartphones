@@ -11,7 +11,7 @@ public class Manufacturer extends Owner {
 
     @SuppressWarnings("unused")
     public Manufacturer() {}
-
+    @SuppressWarnings("unused")
     public Manufacturer(ResultSet from) {
         parse(from);
     }

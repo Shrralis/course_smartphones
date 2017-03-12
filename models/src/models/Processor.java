@@ -12,7 +12,7 @@ public class Processor extends Owner {
     public double frequency;
     @SuppressWarnings("unused")
     public Processor() {}
-
+    @SuppressWarnings("unused")
     public Processor(ResultSet from) {
         parse(from);
     }

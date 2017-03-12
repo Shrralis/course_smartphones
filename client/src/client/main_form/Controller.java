@@ -221,9 +221,7 @@ public class Controller {
             final MenuItem addToStore = new MenuItem("Додати до магазину");
             final MenuItem findStores = new MenuItem("Знайти магазини");
 
-            addToStore.setOnAction(event -> {
-                openModelToStoreDataForm();
-            });
+            addToStore.setOnAction(event -> openModelToStoreDataForm());
             findStores.setOnAction(event -> {
                 clearStoreTable();
                 getAllStores(row.getItem().getId());
@@ -445,30 +443,32 @@ public class Controller {
                 case Add:
                     title = "Додати модель";
 
-                    c.setOnOkButtonClickListener(() -> {
-                        try {
-                            outputStream.writeObject(ServerQuery.create("model", "add", c1.getModelToProcess(), null));
+                    if (c != null) {
+                        c.setOnOkButtonClickListener(() -> {
+                            try {
+                                outputStream.writeObject(ServerQuery.create("model", "add", c1.getModelToProcess(), null));
 
-                            ServerResult result = (ServerResult) inputStream.readObject();
+                                ServerResult result = (ServerResult) inputStream.readObject();
 
-                            if (result != null) {
-                                if (result.getResult() == 0) {
-                                    if (modelsData == null) {
-                                        modelsData = FXCollections.observableArrayList((SmartphoneModel) result.getObjects().get(0));
+                                if (result != null) {
+                                    if (result.getResult() == 0) {
+                                        if (modelsData == null) {
+                                            modelsData = FXCollections.observableArrayList((SmartphoneModel) result.getObjects().get(0));
+                                        } else {
+                                            modelsData.add((SmartphoneModel) result.getObjects().get(0));
+                                        }
+                                        stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
                                     } else {
-                                        modelsData.add((SmartphoneModel) result.getObjects().get(0));
+                                        System.err.println("Result is not 0, message: " + result.getMessage());
                                     }
-                                    stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
                                 } else {
-                                    System.err.println("Result is not 0, message: " + result.getMessage());
+                                    System.err.println("RESULT IS null");
                                 }
-                            } else {
-                                System.err.println("RESULT IS null");
+                            } catch (IOException | ClassNotFoundException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException | ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                     break;
                 case Edit:
                     title = "Редагувати модель";
@@ -481,45 +481,50 @@ public class Controller {
                         alert.showAndWait();
                         return;
                     }
-                    c.setModelToProcess(model[0]);
-                    c.setOnOkButtonClickListener(() -> {
-                        try {
-                            HashMap<String, Object> params = new HashMap<>();
 
-                            params.put("id", c1.getModelToProcess().getId());
-                            outputStream.writeObject(ServerQuery.create("model", "edit", c1.getModelToProcess(), params));
+                    if (c != null) {
+                        c.setModelToProcess(model[0]);
+                        c.setOnOkButtonClickListener(() -> {
+                            try {
+                                HashMap<String, Object> params = new HashMap<>();
 
-                            ServerResult result = (ServerResult) inputStream.readObject();
+                                params.put("id", c1.getModelToProcess().getId());
+                                outputStream.writeObject(ServerQuery.create("model", "edit", c1.getModelToProcess(), params));
 
-                            if (result != null) {
-                                if (result.getResult() == 0) {
-                                    modelsData.set(modelTable.getSelectionModel().getSelectedIndex(), (SmartphoneModel) result.getObjects().get(0));
-                                    modelTable.refresh();
-                                    stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                ServerResult result = (ServerResult) inputStream.readObject();
+
+                                if (result != null) {
+                                    if (result.getResult() == 0) {
+                                        modelsData.set(modelTable.getSelectionModel().getSelectedIndex(), (SmartphoneModel) result.getObjects().get(0));
+                                        modelTable.refresh();
+                                        stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                    } else {
+                                        System.err.println("Result is not 0, message: " + result.getMessage());
+                                    }
                                 } else {
-                                    System.err.println("Result is not 0, message: " + result.getMessage());
+                                    System.err.println("RESULT is null");
                                 }
-                            } else {
-                                System.err.println("RESULT is null");
+                            } catch (IOException | ClassNotFoundException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException | ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                     break;
                 case Search:
                     title = "Пошук моделей";
                     width += 50;
 
-                    c.setOnOkButtonClickListener(() -> {
-                        try {
-                            modelsData.clear();
-                            getAllModels(c1.getParamsForSearch());
-                            stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
-                        } catch (IllegalAccessException ignored) {
-                            ignored.printStackTrace();
-                        }
-                    });
+                    if (c != null) {
+                        c.setOnOkButtonClickListener(() -> {
+                            try {
+                                modelsData.clear();
+                                getAllModels(c1.getParamsForSearch());
+                                stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
+                            } catch (IllegalAccessException ignored) {
+                                ignored.printStackTrace();
+                            }
+                        });
+                    }
                     break;
                 default:
                     title = "Unknown";
@@ -528,17 +533,19 @@ public class Controller {
 
             final Stage parentStage1 = parentStage;
 
-            stage.setTitle(title);
-            stage.setScene(new Scene(root));
-            stage.setOnCloseRequest(event1 -> parentStage1.setIconified(false));
-            stage.setMinWidth(width);
-            stage.setMinHeight(width);
-            stage.setMaxWidth(width);
-            stage.setMaxHeight(1360);
-            stage.initStyle(StageStyle.UTILITY);
-            c.setFormType(formType);
-            stage.show();
-            parentStage.setIconified(true);
+            if (stage != null && root != null) {
+                stage.setTitle(title);
+                stage.setScene(new Scene(root));
+                stage.setOnCloseRequest(event1 -> parentStage1.setIconified(false));
+                stage.setMinWidth(width);
+                stage.setMinHeight(width);
+                stage.setMaxWidth(width);
+                stage.setMaxHeight(1360);
+                stage.initStyle(StageStyle.UTILITY);
+                c.setFormType(formType);
+                stage.show();
+                parentStage.setIconified(true);
+            }
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -584,30 +591,32 @@ public class Controller {
                 case Add:
                     title = "Додати магазин";
 
-                    c.setOnOkButtonClickListener(() -> {
-                        try {
-                            outputStream.writeObject(ServerQuery.create("store", "add", c1.getStoreToProcess(), null));
+                    if (c != null) {
+                        c.setOnOkButtonClickListener(() -> {
+                            try {
+                                outputStream.writeObject(ServerQuery.create("store", "add", c1.getStoreToProcess(), null));
 
-                            ServerResult result = (ServerResult) inputStream.readObject();
+                                ServerResult result = (ServerResult) inputStream.readObject();
 
-                            if (result != null) {
-                                if (result.getResult() == 0) {
-                                    if (storesData == null) {
-                                        storesData = FXCollections.observableArrayList((Store) result.getObjects().get(0));
+                                if (result != null) {
+                                    if (result.getResult() == 0) {
+                                        if (storesData == null) {
+                                            storesData = FXCollections.observableArrayList((Store) result.getObjects().get(0));
+                                        } else {
+                                            storesData.add((Store) result.getObjects().get(0));
+                                        }
+                                        stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
                                     } else {
-                                        storesData.add((Store) result.getObjects().get(0));
+                                        System.err.println("Result is not 0, message: " + result.getMessage());
                                     }
-                                    stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
                                 } else {
-                                    System.err.println("Result is not 0, message: " + result.getMessage());
+                                    System.err.println("RESULT IS null");
                                 }
-                            } else {
-                                System.err.println("RESULT IS null");
+                            } catch (IOException | ClassNotFoundException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException | ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                     break;
                 case Edit:
                     title = "Редагувати магазин";
@@ -620,31 +629,33 @@ public class Controller {
                         alert.showAndWait();
                         return;
                     }
-                    c.setStoreToProcess(store[0]);
-                    c.setOnOkButtonClickListener(() -> {
-                        try {
-                            HashMap<String, Object> params = new HashMap<>();
+                    if (c != null) {
+                        c.setStoreToProcess(store[0]);
+                        c.setOnOkButtonClickListener(() -> {
+                            try {
+                                HashMap<String, Object> params = new HashMap<>();
 
-                            params.put("id", c1.getStoreToProcess().getId());
-                            outputStream.writeObject(ServerQuery.create("store", "edit", c1.getStoreToProcess(), params));
+                                params.put("id", c1.getStoreToProcess().getId());
+                                outputStream.writeObject(ServerQuery.create("store", "edit", c1.getStoreToProcess(), params));
 
-                            ServerResult result = (ServerResult) inputStream.readObject();
+                                ServerResult result = (ServerResult) inputStream.readObject();
 
-                            if (result != null) {
-                                if (result.getResult() == 0) {
-                                    storesData.set(storeTable.getSelectionModel().getSelectedIndex(), (Store) result.getObjects().get(0));
-                                    storeTable.refresh();
-                                    stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                if (result != null) {
+                                    if (result.getResult() == 0) {
+                                        storesData.set(storeTable.getSelectionModel().getSelectedIndex(), (Store) result.getObjects().get(0));
+                                        storeTable.refresh();
+                                        stage1.fireEvent(new WindowEvent(stage1, WindowEvent.WINDOW_CLOSE_REQUEST));
+                                    } else {
+                                        System.err.println("Result is not 0, message: " + result.getMessage());
+                                    }
                                 } else {
-                                    System.err.println("Result is not 0, message: " + result.getMessage());
+                                    System.err.println("RESULT is null");
                                 }
-                            } else {
-                                System.err.println("RESULT is null");
+                            } catch (IOException | ClassNotFoundException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException | ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                     break;
                 default:
                     title = "Unknown";
@@ -653,17 +664,19 @@ public class Controller {
 
             final Stage parentStage1 = parentStage;
 
-            stage.setTitle(title);
-            stage.setScene(new Scene(root));
-            stage.setOnCloseRequest(event1 -> parentStage1.setIconified(false));
-            stage.setMinWidth(width);
-            stage.setMinHeight(height);
-            stage.setMaxWidth(width);
-            stage.setMaxHeight(height);
-            stage.initStyle(StageStyle.UTILITY);
-            c.setFormType(formType);
-            stage.show();
-            parentStage.setIconified(true);
+            if (stage != null && root != null && c != null) {
+                stage.setTitle(title);
+                stage.setScene(new Scene(root));
+                stage.setOnCloseRequest(event1 -> parentStage1.setIconified(false));
+                stage.setMinWidth(width);
+                stage.setMinHeight(height);
+                stage.setMaxWidth(width);
+                stage.setMaxHeight(height);
+                stage.initStyle(StageStyle.UTILITY);
+                c.setFormType(formType);
+                stage.show();
+                parentStage.setIconified(true);
+            }
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
 

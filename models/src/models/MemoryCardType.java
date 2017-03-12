@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class MemoryCardType extends Owner {
     @SuppressWarnings("unused")
-    public MemoryCardType() {}
-
+    MemoryCardType() {}
+    @SuppressWarnings("unused")
     public MemoryCardType(ResultSet from) {
         parse(from);
     }

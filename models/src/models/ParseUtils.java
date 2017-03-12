@@ -17,6 +17,7 @@ public class ParseUtils {
      * @param from server response like this format: {@code field: 1}
      * @param name name of field to read
      */
+    @SuppressWarnings("unused")
     public static boolean parseBoolean(ResultSet from, String name) {
         try {
             return from != null && from.getInt(name) == 1;
@@ -30,6 +31,7 @@ public class ParseUtils {
      * @param from server response like this format: {@code field: 34}
      * @param name name of field to read
      */
+    @SuppressWarnings("unused")
     public static int parseInt(ResultSet from, String name) {
         if (from == null) {
             return 0;
@@ -47,6 +49,7 @@ public class ParseUtils {
      * @param from server response like this format: {@code field: 34}
      * @param name name of field to read
      */
+    @SuppressWarnings("unused")
     public static long parseLong(ResultSet from, String name) {
         if (from == null) {
             return 0;
@@ -75,7 +78,7 @@ public class ParseUtils {
      * @throws SQLException if source object structure is invalid
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static <T extends Model> T parseViaReflection(T object, ResultSet source) throws SQLException {
+    static <T extends Model> T parseViaReflection(T object, ResultSet source) throws SQLException {
         if (source == null) {
             return object;
         }

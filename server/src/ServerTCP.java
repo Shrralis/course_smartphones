@@ -9,7 +9,7 @@ public class ServerTCP implements Runnable {
     private int iServerPort = 6777;
     private ServerSocket serverSocket = null;
     private boolean isStopped = false;
-    private Thread runningThread = null;
+    @SuppressWarnings("unused") private Thread runningThread = null;
 
     public static void main(String args[]) {
         new Thread(new ServerTCP(6777)).start();
@@ -59,7 +59,7 @@ public class ServerTCP implements Runnable {
     private synchronized boolean isStopped() {
         return isStopped;
     }
-
+    @SuppressWarnings("unused")
     public synchronized void stop() {
         isStopped = true;
 

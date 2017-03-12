@@ -35,6 +35,7 @@ public abstract class Model implements Serializable {
      * @see #setTag(Object)
      * @see #getTag(int)
      */
+    @SuppressWarnings("unused")
     public Object getTag() {
         return mTag;
     }
@@ -47,6 +48,7 @@ public abstract class Model implements Serializable {
      * @see #getTag()
      * @see #setTag(int, Object)
      */
+    @SuppressWarnings("unused")
     public void setTag(Object tag) {
         mTag = tag;
     }
@@ -61,6 +63,7 @@ public abstract class Model implements Serializable {
      * @see #setTag(int, Object)
      * @see #getTag()
      */
+    @SuppressWarnings("unused")
     public Object getTag(int key) {
         if (mKeyedTags != null) return mKeyedTags.get(key);
         return null;
@@ -73,13 +76,14 @@ public abstract class Model implements Serializable {
      * @see #setTag(Object)
      * @see #getTag(int)
      */
+    @SuppressWarnings("unused")
     public void setTag(int key, final Object tag) {
         if (mKeyedTags == null) {
             mKeyedTags = new HashMap<>(2);
         }
         mKeyedTags.put(key, tag);
     }
-
+    @SuppressWarnings("unused")
     public Model(ResultSet from) throws SQLException {
         parse(from);
     }

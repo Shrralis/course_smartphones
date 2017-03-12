@@ -7,8 +7,8 @@ import java.sql.ResultSet;
  */
 public class SimCardType extends Owner {
     @SuppressWarnings("unused")
-    public SimCardType() {}
-
+    SimCardType() {}
+    @SuppressWarnings("unused")
     public SimCardType(ResultSet from) {
         parse(from);
     }

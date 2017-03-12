@@ -11,7 +11,7 @@ public class Store extends Owner {
     private ModelToStore modelToStore = null;
     @SuppressWarnings("unused")
     public Store() {}
-
+    @SuppressWarnings("unused")
     public Store(ResultSet from) {
         parse(from);
     }

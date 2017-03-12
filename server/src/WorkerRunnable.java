@@ -193,7 +193,10 @@ public class WorkerRunnable implements Runnable {
                     System.out.println("Unknown table (" + table + ") for get()");
                 }
             }
-            connection.close();
+
+            if (connection != null) {
+                connection.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -235,7 +238,10 @@ public class WorkerRunnable implements Runnable {
                     }
                 }
             }
-            connection.close();
+
+            if (connection != null) {
+                connection.close();
+            }
         } catch (SQLException | IllegalAccessException ignored) {
             ignored.printStackTrace();
         }
@@ -295,7 +301,10 @@ public class WorkerRunnable implements Runnable {
                     }
                 }
             }
-            connection.close();
+
+            if (connection != null) {
+                connection.close();
+            }
         } catch (SQLException | IllegalAccessException ignored) {
             ignored.printStackTrace();
         }
