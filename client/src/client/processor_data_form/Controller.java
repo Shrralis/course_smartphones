@@ -14,7 +14,7 @@ import models.Processor;
  * Created by shrralis on 3/2/17.
  */
 public class Controller {
-    private client.data_form.Controller.OnOkButtonClickListener onOkButtonClickListener = null;
+    private client.model_data_form.Controller.OnOkButtonClickListener onOkButtonClickListener = null;
     private Processor processor = null;
 
     @FXML TextField name;
@@ -33,7 +33,7 @@ public class Controller {
         }
     }
 
-    public void setOnOkButtonClickListener(client.data_form.Controller.OnOkButtonClickListener listener) {
+    public void setOnOkButtonClickListener(client.model_data_form.Controller.OnOkButtonClickListener listener) {
         onOkButtonClickListener = listener;
     }
 

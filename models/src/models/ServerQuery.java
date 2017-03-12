@@ -49,7 +49,7 @@ public class ServerQuery<T extends Owner> implements Serializable {
 
             for (String key : mQueryParameters.keySet()) {
                 if (mQueryParameters.get(key) != null) {
-                    if (key.matches("^arr(\\s|\\S)*")) {
+                    if (key.matches("^arr(\\s|\\S)*$")) {
                         if (!((HashMap) mQueryParameters.get(key)).isEmpty()) {
                             result += parseOrConditionFromArray((HashMap<String, Object>) mQueryParameters.get(key));
                         }
@@ -60,7 +60,7 @@ public class ServerQuery<T extends Owner> implements Serializable {
                         result += (sKey.matches("^`(exp)(\\s|\\S)*`$") ? mQueryParameters.get(key) : (sKey +
                                 (mQueryParameters.get(key) instanceof Number ? " = " + mQueryParameters.get(key) :
                                         (((String) mQueryParameters.get(key)).matches("^(NOT )?NULL$") ? " IS " +
-                                                mQueryParameters.get(key) : " LIKE '" + mQueryParameters.get(key) + "'"))))
+                                                mQueryParameters.get(key) : " LIKE '%" + mQueryParameters.get(key) + "%'"))))
                                 + " AND ";
                     }
                 }
@@ -93,6 +93,7 @@ public class ServerQuery<T extends Owner> implements Serializable {
         String result = "(";
 
         for (String key : map.keySet()) {
+            System.out.println(key);
             if (map.get(key) != null) {
                 if (key.matches("^arr(\\s|\\S)*/")) {
                     if (!((HashMap) map.get(key)).isEmpty()) {
@@ -119,10 +120,43 @@ public class ServerQuery<T extends Owner> implements Serializable {
 
         return result;
     }
-    public String getInsertMySQLQuery() throws IllegalAccessException {
-        String result = "INSERT INTO " + sTableName + " " + ParseUtils.parseViaReflectionToSQL(mObjectToProcess) + ";";
+
+    public String getInsertMysqlQuery() throws IllegalAccessException {
+        String result = "INSERT INTO `" + sTableName + "` " + ParseUtils.parseViaReflectionToSqlInsert(mObjectToProcess) + ";";
+
+        if (sTableName.equalsIgnoreCase("store_has_model")) {
+            String[] temp = result.split(", `id`");
+            result = "";
+
+            for (String s : temp) {
+                result += s;
+            }
+            temp = result.split(", \\d\\);");
+            result = "";
+
+            for (String s : temp) {
+                result += s;
+            }
+
+            result += ");";
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    public String getUpdateMysqlQuery() throws IllegalAccessException {
+        String result = "UPDATE `" + sTableName + "` SET " + ParseUtils.parseViaReflectionToSqlUpdate(mObjectToProcess) + " " +
+                getMySQLCondition() + ";";
 
         System.out.println(result);
         return result;
+    }
+
+    public void setQueryParameters(HashMap<String, Object> queryParameters) {
+        this.mQueryParameters = queryParameters;
+    }
+
+    public boolean hasQueryParams() {
+        return mQueryParameters != null;
     }
 }

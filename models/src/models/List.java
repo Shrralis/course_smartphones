@@ -57,6 +57,8 @@ public class List<T extends Owner> extends Model implements java.util.List<T>, S
     public void fill(ResultSet from, Parser<? extends T> creator, Connection connection) {
         if (from != null) {
             try {
+                from.beforeFirst();
+
                 while (from.next()) {
                     T object = creator.parseObject(from, connection);
 
@@ -64,14 +66,15 @@ public class List<T extends Owner> extends Model implements java.util.List<T>, S
                         items.add(object);
                     }
                 }
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
     }
 
     public void fill(ResultSet from, Parser<? extends T> creator) {
         if (from != null) {
             try {
+                from.beforeFirst();
+
                 while (from.next()) {
                     T object = creator.parseObject(from);
 
@@ -79,8 +82,7 @@ public class List<T extends Owner> extends Model implements java.util.List<T>, S
                         items.add(object);
                     }
                 }
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
         }
     }
 
@@ -114,7 +116,7 @@ public class List<T extends Owner> extends Model implements java.util.List<T>, S
     }
 
     public List<T> search(String query) {
-        List<T> result = new List<T>();
+        List<T> result = new List<>();
         final Pattern pattern = Pattern.compile("(?i).*\\b" + query + ".*");
 
         for (T item : this) {

@@ -3,7 +3,6 @@ package models;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by shrralis on 2/19/17.
@@ -61,44 +60,40 @@ public class SmartphoneModel extends Owner {
 
     @SuppressWarnings("unused")
     public SmartphoneModel() {}
-
-    public SmartphoneModel(ResultSet from, Connection connection) {
-        parse(from, connection);
-    }
     @Override
-    public Owner parse(ResultSet from, Connection connection) {
+    public SmartphoneModel parse(ResultSet from, Connection connection) {
         super.parse(from);
 
         try {
-            manufacturer = new Manufacturer(get("SELECT * FROM `manufacturer` WHERE `id` = "
+            manufacturer = ParseUtils.parseViaReflection(new Manufacturer(), get("SELECT * FROM `manufacturer` WHERE `id` = "
                     + from.getInt("manufacturer"), connection));
-            standard = new Standard(get("SELECT * FROM `standard` WHERE `id` = "
+            standard = ParseUtils.parseViaReflection(new Standard(), get("SELECT * FROM `standard` WHERE `id` = "
                     + from.getInt("standard"), connection));
-            os = new OS(get("SELECT * FROM `os` WHERE `id` = "
+            os = ParseUtils.parseViaReflection(new OS(), get("SELECT * FROM `os` WHERE `id` = "
                     + from.getInt("os"), connection));
             os_version = from.getString("os_version");
-            enclosure_type = new EnclosureType(get("SELECT * FROM `enclosureType` WHERE `id` = "
+            enclosure_type = ParseUtils.parseViaReflection(new EnclosureType(), get("SELECT * FROM `enclosureType` WHERE `id` = "
                     + from.getInt("enclosure_type"), connection));
-            enclosure_material = new EnclosureMaterial(get("SELECT * FROM `enclosureMaterial` WHERE `id` = "
+            enclosure_material = ParseUtils.parseViaReflection(new EnclosureMaterial(), get("SELECT * FROM `enclosureMaterial` WHERE `id` = "
                     + from.getInt("enclosure_material"), connection));
             sim_card_amount = from.getInt("sim_card_amount");
-            sim_card_type = new SimCardType(get("SELECT * FROM `simCardType` WHERE `id` = "
+            sim_card_type = ParseUtils.parseViaReflection(new SimCardType(), get("SELECT * FROM `simCardType` WHERE `id` = "
                     + from.getInt("sim_card_type"), connection));
             thickness = from.getDouble("thickness");
             weight = from.getDouble("weight");
             color = from.getString("color");
-            screen_type = new ScreenType(get("SELECT * FROM `screenType` WHERE `id` = "
+            screen_type = ParseUtils.parseViaReflection(new ScreenType(), get("SELECT * FROM `screenType` WHERE `id` = "
                     + from.getInt("screen_type"), connection));
             screen_diagonal = from.getDouble("screen_diagonal");
             screen_resolution = from.getString("screen_resolution");
-            battery_type = new BatteryType(get("SELECT * FROM `batteryType` WHERE `id` = "
+            battery_type = ParseUtils.parseViaReflection(new BatteryType(), get("SELECT * FROM `batteryType` WHERE `id` = "
                     + from.getInt("battery_type"), connection));
             battery_capacity = from.getInt("battery_capacity");
             ram = from.getInt("ram");
             internal_storage = from.getInt("internal_storage");
-            memory_card_type = new MemoryCardType(get("SELECT * FROM `memoryCardType` WHERE `id` = "
+            memory_card_type = ParseUtils.parseViaReflection(new MemoryCardType(), get("SELECT * FROM `memoryCardType` WHERE `id` = "
                     + from.getInt("memory_card_type"), connection));
-            processor = new Processor(get("SELECT * FROM `processor` WHERE `id` = "
+            processor = ParseUtils.parseViaReflection(new Processor(), get("SELECT * FROM `processor` WHERE `id` = "
                     + from.getInt("processor"), connection));
             wifi = from.getString("wifi");
             nfc = from.getInt("nfc") == 1;
@@ -112,10 +107,7 @@ public class SmartphoneModel extends Owner {
     }
 
     public ResultSet get(String sql, Connection connection) throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery(sql);
-
-        return result;
+        return connection.createStatement().executeQuery(sql);
     }
 
     public Manufacturer getManufacturer() {
@@ -126,7 +118,7 @@ public class SmartphoneModel extends Owner {
         return standard;
     }
 
-    public OS getOS() {
+    public OS getOs() {
         return os;
     }
 
@@ -134,11 +126,11 @@ public class SmartphoneModel extends Owner {
         return os_version;
     }
 
-    public EnclosureType getEnclosureType() {
+    public EnclosureType getEnclosure_type() {
         return enclosure_type;
     }
 
-    public EnclosureMaterial getEnclosureMaterial() {
+    public EnclosureMaterial getEnclosure_material() {
         return enclosure_material;
     }
 
@@ -146,7 +138,7 @@ public class SmartphoneModel extends Owner {
         return sim_card_amount;
     }
 
-    public SimCardType getSimCardType() {
+    public SimCardType getSim_card_type() {
         return sim_card_type;
     }
 
@@ -162,7 +154,7 @@ public class SmartphoneModel extends Owner {
         return color;
     }
 
-    public ScreenType getScreenType() {
+    public ScreenType getScreen_type() {
         return screen_type;
     }
 
@@ -174,7 +166,7 @@ public class SmartphoneModel extends Owner {
         return screen_resolution;
     }
 
-    public BatteryType getBatteryType() {
+    public BatteryType getBattery_type() {
         return battery_type;
     }
 
@@ -190,7 +182,7 @@ public class SmartphoneModel extends Owner {
         return internal_storage;
     }
 
-    public MemoryCardType getMemoryCardType() {
+    public MemoryCardType getMemory_card_type() {
         return memory_card_type;
     }
 
@@ -216,5 +208,34 @@ public class SmartphoneModel extends Owner {
 
     public String getFrontal_camera() {
         return frontal_camera;
+    }
+
+    public String toOut() {
+        String result = "";
+        result += "manufacturer: " + manufacturer + "\n";
+        result += "model: " + name + "\n";
+        result += "standard: " + standard + "\n";
+        result += "os: " + os + "\n";
+        result += "os_version: " + os_version + "\n";
+        result += "enclosure_type: " + enclosure_type + "\n";
+        result += "material: " + enclosure_material + "\n";
+        result += "sim_amount: " + sim_card_amount + "\n";
+        result += "thickness: " + thickness + "\n";
+        result += "weight: " + weight + "\n";
+        result += "color: " + color + "\n";
+        result += "screen_type: " + screen_type + "\n";
+        result += "screen_diagonal: " + screen_diagonal + "\n";
+        result += "screen_resolution: " + screen_resolution + "\n";
+        result += "battery_type: " + battery_type + "\n";
+        result += "battery_capacity: " + battery_capacity + "\n";
+        result += "ram: " + ram + "\n";
+        result += "internal: " + internal_storage + "\n";
+        result += "mem_card_type: " + memory_card_type + "\n";
+        result += "processor: " + processor + "\n";
+        result += "wifi: " + wifi + "\n";
+        result += "camera: " + camera + "\n";
+        result += "frontal_cam: " + frontal_camera;
+
+        return result;
     }
 }

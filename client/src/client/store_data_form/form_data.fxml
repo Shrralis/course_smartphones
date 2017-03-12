@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.store_data_form.Controller">
+   <bottom>
+      <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Pane maxWidth="+Infinity" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Pane>
+            <Button cancelButton="true" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseCancelClick" text="Відміна" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button minWidth="80.0" mnemonicParsing="false" onMouseClicked="#onMouseOkClick" text="ОК" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="14.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <GridPane alignment="CENTER" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Назва магазину:" />
+            <TextField fx:id="name" alignment="CENTER" promptText="ROZETKA" GridPane.columnIndex="1" />
+            <Label text="Інтернет-адреса:" GridPane.rowIndex="1" />
+            <TextField fx:id="link" alignment="CENTER" promptText="http://rozetka.ua" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="Infinity" minWidth="-Infinity" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="Infinity" minWidth="0.0" prefWidth="0.0" />
+         </columnConstraints>
+         <padding>
+            <Insets left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="NEVER" />
+         </rowConstraints>
+      </GridPane>
+   </center>
+</BorderPane>

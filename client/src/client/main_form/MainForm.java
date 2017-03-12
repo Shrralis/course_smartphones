@@ -46,7 +46,7 @@ public class MainForm extends Application {
     private void openServerConnection() {
         try {
             if (clientSocket == null || clientSocket.isClosed()) {
-                clientSocket = new Socket("localhost", 6777);
+                clientSocket = new Socket("shrralis.com", 6777);
             }
 
             if (outputStream == null) {
@@ -73,8 +73,10 @@ public class MainForm extends Application {
     private void drawForm(Stage primaryStage) {
         Parent root = loader.getRoot();
 
-        ((Controller) loader.getController()).getAll();
-        ((Controller) loader.getController()).setOnRefreshButtonClickListener(this::openServerConnection);
+        ((Controller) loader.getController()).getAllModels();
+        ((Controller) loader.getController()).getAllStores();
+        ((Controller) loader.getController()).setOnRefreshModelsButtonClickListener(this::openServerConnection);
+        ((Controller) loader.getController()).setOnRefreshStoresButtonClickListener(this::openServerConnection);
         primaryStage.setTitle("Каталог смартфонів");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinWidth(1050);

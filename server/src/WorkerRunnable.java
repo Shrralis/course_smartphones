@@ -12,19 +12,18 @@ import java.sql.*;
 @SuppressWarnings("unchecked")
 public class WorkerRunnable implements Runnable {
     private Socket clientSocket = null;
-    private ObjectInputStream inputStream = null;
     private ObjectOutputStream outputStream = null;
     private Connection connection = null;
     private String sIP = null;
 
-    public WorkerRunnable(Socket clientSocket) {
+    WorkerRunnable(Socket clientSocket) {
         this.clientSocket = clientSocket;
         sIP = clientSocket.getInetAddress().getHostAddress();
     }
 
     public void run() {
         try {
-            inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ServerResult result;
 
@@ -50,8 +49,10 @@ public class WorkerRunnable implements Runnable {
             return ServerResult.create(1, "No query");
         } else {
             String method = query.getMethodName();
+            String table = query.getTableName();
+            table = table != null ? table.toLowerCase() : "";
 
-            System.out.println("Called: " + query.getMethodName() + "(" + query.getTableName().toLowerCase() + ") from - "
+            System.out.println("Called: " + method + "(" + table + ") from - "
                     + clientSocket.getInetAddress().getHostAddress());
 
             if (method.equalsIgnoreCase("disconnect")) {
@@ -74,15 +75,17 @@ public class WorkerRunnable implements Runnable {
             if (method.equalsIgnoreCase("delete")) {
                 return delete(query);
             }
+
+            if (method.equalsIgnoreCase("edit")) {
+                return edit(query);
+            }
         }
         return null;
     }
 
     private ServerResult processResult(ServerResult result) throws IOException {
         if (result == null) {
-//            EMPTY RESULT
-        } else if (result.getResult() != 0) {
-//            ERROR
+            result = ServerResult.create(-1, "some error");
         } else {
             if (result.getMessage().equalsIgnoreCase("disconnect")) {
                 return null;
@@ -98,8 +101,8 @@ public class WorkerRunnable implements Runnable {
 
                 connection = DriverManager.getConnection(
                         "jdbc:mysql://localhost:3306/smartphones?useUnicode=true&characterEncoding=UTF-8",
-                        "root",
-                        "zolotorig91"
+                        "development",
+                        "tempPassword_byShrralis"
                 );
             }
             return true;
@@ -127,8 +130,17 @@ public class WorkerRunnable implements Runnable {
 
                 if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
                         "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
-                    ResultSet resultSet = statement.executeQuery("SELECT * FROM `" + table.toLowerCase()
-                            + query.getMySQLCondition() + "`;");
+                    if (table.equalsIgnoreCase("store") && query.hasQueryParams()) {
+                        ResultSet stores = statement.executeQuery("SELECT * FROM `store_has_model`" +
+                                query.getMySQLCondition() + ";");
+                        result = ServerResult.create(new List(stores, ModelToStore.class, connection));
+
+                        connection.close();
+                        return result;
+                    }
+
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM `" + table + "`" +
+                            query.getMySQLCondition() + ";");
 
                     if (table.equalsIgnoreCase("manufacturer")) {
                         result = ServerResult.create(new List(resultSet, Manufacturer.class));
@@ -199,8 +211,8 @@ public class WorkerRunnable implements Runnable {
                         ResultSet.CONCUR_READ_ONLY);
 
                 if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
-                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
-                    int iResult = statement.executeUpdate(query.getInsertMySQLQuery(), Statement.RETURN_GENERATED_KEYS);
+                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)|(store_has_model)$")) {
+                    int iResult = statement.executeUpdate(query.getInsertMysqlQuery(), Statement.RETURN_GENERATED_KEYS);
 
                     if (iResult >= 0) {
                         ResultSet rs = statement.getGeneratedKeys();
@@ -210,17 +222,22 @@ public class WorkerRunnable implements Runnable {
                             id = rs.getInt(1);
                         }
 
-                        result = ServerResult.create(
-                                new List(statement.executeQuery("SELECT * FROM " + table + " WHERE `id` = " + id + ";"),
-                                        query.getObjectToProcess().getClass()));
+                        if (table.equalsIgnoreCase("store_has_model")) {
+                            result = ServerResult.create(0, "successfully added");
+                        } else {
+                            result = ServerResult.create(
+                                    new List(statement.executeQuery("SELECT * FROM `" + table + "` WHERE `id` = " + id + ";"),
+                                            query.getObjectToProcess().getClass(), connection)
+                            );
+                        }
                     } else {
                         result = ServerResult.create(1, "not added");
                     }
                 }
             }
             connection.close();
-        } catch (SQLException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (SQLException | IllegalAccessException ignored) {
+            ignored.printStackTrace();
         }
         return result;
     }
@@ -237,7 +254,7 @@ public class WorkerRunnable implements Runnable {
 
                 if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
                         "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
-                    int iResult = statement.executeUpdate("DELETE FROM " + table + " WHERE `id` = "
+                    int iResult = statement.executeUpdate("DELETE FROM `" + table + "` WHERE `id` = "
                             + query.getObjectToProcess().getId() + ";");
 
                     if (iResult >= 0) {
@@ -248,6 +265,40 @@ public class WorkerRunnable implements Runnable {
                 }
             }
         } catch (SQLException ignored) {}
+        return result;
+    }
+
+    private ServerResult edit(ServerQuery query) {
+        ServerResult result = null;
+
+        try {
+            String table = query.getTableName();
+
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+
+                if (table.matches("^(manufacturer)|(standard)|(os)|((enclosure)(((t|T)ype)|((m|M)aterial)))" +
+                        "|(((sim(c|C)ard)|(screen)|(battery)|(memory(c|C)ard))((t|T)ype))|(processor)|(store)|(model)$")) {
+                    int iResult = statement.executeUpdate(query.getUpdateMysqlQuery(), Statement.RETURN_GENERATED_KEYS);
+
+                    if (iResult >= 0) {
+                        int id = query.getObjectToProcess().getId();
+
+                        result = ServerResult.create(
+                                new List(statement.executeQuery("SELECT * FROM `" + table + "` WHERE `id` = " + id + ";"),
+                                        query.getObjectToProcess().getClass(), connection)
+                        );
+                        System.out.println("Size: " + result.getObjects().size());
+                    } else {
+                        result = ServerResult.create(1, "not updated");
+                    }
+                }
+            }
+            connection.close();
+        } catch (SQLException | IllegalAccessException ignored) {
+            ignored.printStackTrace();
+        }
         return result;
     }
 }

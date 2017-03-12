@@ -2,24 +2,32 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="client:jar" />
+      <artifact name="server:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e54dcf7e-28c1-4c60-86fa-e3c725b003ee" name="Default" comment="last updates">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/dataform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/data_form/Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/data_form/form_data.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/mainform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/main_form/Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/mainform/MainForm.java" afterPath="$PROJECT_DIR$/client/src/client/main_form/MainForm.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/mainform/form_main.fxml" afterPath="$PROJECT_DIR$/client/src/client/main_form/form_main.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/manufacturerdataform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/manufacturerdataform/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/manufacturer_data_form/form_data.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/processordataform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/processordataform/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/processor_data_form/form_data.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/secondarydataform/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/secondarydataform/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/secondary_data_form/form_data.fxml" />
+    <list default="true" id="e54dcf7e-28c1-4c60-86fa-e3c725b003ee" name="Default" comment="all inserts is working&#10;all deletes is working&#10;need to finish model editing, search&#10;need to create stores.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/server_jar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/model_to_store_data_form/Controller.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/model_to_store_data_form/form_data.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/store_data_form/Controller.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/client/store_data_form/form_data.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/src/models/ModelToStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/META-INF/MANIFEST.MF" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/data_form/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/model_data_form/Controller.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/src/client/data_form/form_data.fxml" afterPath="$PROJECT_DIR$/client/src/client/model_data_form/form_data.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/client/src/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/main_form/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/main_form/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/main_form/MainForm.java" afterPath="$PROJECT_DIR$/client/src/client/main_form/MainForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/main_form/form_main.fxml" afterPath="$PROJECT_DIR$/client/src/client/main_form/form_main.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java" afterPath="$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/src/models/List.java" afterPath="$PROJECT_DIR$/models/src/models/List.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/src/models/ParseUtils.java" afterPath="$PROJECT_DIR$/models/src/models/ParseUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/src/models/ServerQuery.java" afterPath="$PROJECT_DIR$/models/src/models/ServerQuery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" afterPath="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/src/models/Store.java" afterPath="$PROJECT_DIR$/models/src/models/Store.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/WorkerRunnable.java" afterPath="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,125 +41,26 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="course_smartphones" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/client/data_form/Controller.java">
+      <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/client/main_form/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3061">
-              <caret line="666" column="17" lean-forward="false" selection-start-line="666" selection-start-column="17" selection-end-line="666" selection-end-column="17" />
-              <folding>
-                <element signature="e#9811#9812#0" expanded="true" />
-                <element signature="e#9848#9849#0" expanded="true" />
-                <element signature="e#34195#34225#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="form_data.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/client/data_form/form_data.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="11" column="78" lean-forward="false" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="78" />
+            <state relative-caret-position="403">
+              <caret line="69" column="9" lean-forward="false" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerTCP.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/ServerTCP.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1205">
-              <caret line="49" column="60" lean-forward="false" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerResult.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/src/models/ServerResult.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
-              <folding>
-                <element signature="e#726#727#0" expanded="true" />
-                <element signature="e#782#783#0" expanded="true" />
-                <element signature="e#1042#1043#0" expanded="true" />
-                <element signature="e#1073#1074#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/client/main_form/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="928">
-              <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="701">
-              <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1223#1224#0" expanded="true" />
-                <element signature="e#1255#1256#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="48" column="53" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="48" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1780#1810#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkerRunnable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/WorkerRunnable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1439">
-              <caret line="240" column="28" lean-forward="false" selection-start-line="240" selection-start-column="28" selection-end-line="240" selection-end-column="28" />
-              <folding>
-                <marker date="1488847312000" expanded="true" signature="4446:4545" ph="SELECT * FRO... missingValuemissingValue" />
-                <marker date="1488847312000" expanded="true" signature="8126:8167" ph="SELECT * FRO... missingValue" />
-                <marker date="1488847312000" expanded="true" signature="9261:9273" ph="DELETE FROM " />
-                <marker date="1488847312000" expanded="true" signature="9261:9299" ph="DELETE FROM " />
-                <marker date="1488847312000" expanded="true" signature="9261:9300" ph="DELETE FROM " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -176,6 +85,10 @@
       <find>ini</find>
       <find>trololo</find>
       <find>delete</find>
+      <find>невідо</find>
+      <find>jdb</find>
+      <find>alert</find>
+      <find>alert.initModality(Modality.WINDOW_MODAL);         alert.initOwner(name.getScene().getWindow());</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,16 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/src/mainform/MainForm.java" />
-        <option value="$PROJECT_DIR$/client/src/mainform/Controller.java" />
-        <option value="$PROJECT_DIR$/client/src/Alerts.java" />
-        <option value="$PROJECT_DIR$/client/src/dataform/Controller.java" />
-        <option value="$PROJECT_DIR$/client/src/client/Alerts.java" />
-        <option value="$PROJECT_DIR$/server/src/model/BatteryType.java" />
-        <option value="$PROJECT_DIR$/server/src/model/EnclosureMaterial.java" />
-        <option value="$PROJECT_DIR$/server/src/model/EnclosureType.java" />
-        <option value="$PROJECT_DIR$/server/src/model/Identifiable.java" />
-        <option value="$PROJECT_DIR$/server/src/model/List.java" />
         <option value="$PROJECT_DIR$/server/src/model/Manufacturer.java" />
         <option value="$PROJECT_DIR$/server/src/model/MemoryCardType.java" />
         <option value="$PROJECT_DIR$/server/src/model/Model.java" />
@@ -217,18 +120,13 @@
         <option value="$PROJECT_DIR$/models/src/models/Owner.java" />
         <option value="$PROJECT_DIR$/client/src/client/mainform/MainForm.java" />
         <option value="$PROJECT_DIR$/client/src/client/dataform/form_data.fxml" />
-        <option value="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" />
-        <option value="$PROJECT_DIR$/models/src/models/ServerQuery.java" />
-        <option value="$PROJECT_DIR$/models/src/models/ParseUtils.java" />
         <option value="$PROJECT_DIR$/client/src/client/mainform/Controller.java" />
-        <option value="$PROJECT_DIR$/models/src/models/List.java" />
         <option value="$PROJECT_DIR$/client/src/client/manufacturerdataform/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/processordataform/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/processordataform/form_data.fxml" />
         <option value="$PROJECT_DIR$/client/src/client/manufacturerdataform/form_data.fxml" />
         <option value="$PROJECT_DIR$/client/src/client/secondarydataform/form_data.fxml" />
         <option value="$PROJECT_DIR$/client/src/client/secondarydataform/Controller.java" />
-        <option value="$PROJECT_DIR$/server/src/ServerTCP.java" />
         <option value="$PROJECT_DIR$/client/src/client/dataform/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/processor_data_form/form_data.fxml" />
         <option value="$PROJECT_DIR$/client/src/client/manufacturer_data_form/form_data.fxml" />
@@ -237,8 +135,23 @@
         <option value="$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java" />
         <option value="$PROJECT_DIR$/client/src/client/data_form/form_data.fxml" />
-        <option value="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
         <option value="$PROJECT_DIR$/client/src/client/data_form/Controller.java" />
+        <option value="$PROJECT_DIR$/client/src/client/store_data_form/form_data.fxml" />
+        <option value="$PROJECT_DIR$/server/src/ServerTCP.java" />
+        <option value="$PROJECT_DIR$/client/src/client/main_form/MainForm.java" />
+        <option value="$PROJECT_DIR$/client/src/client/store_data_form/Controller.java" />
+        <option value="$PROJECT_DIR$/client/src/client/model_to_store_data_form/form_data.fxml" />
+        <option value="$PROJECT_DIR$/client/src/client/model_data_form/Controller.java" />
+        <option value="$PROJECT_DIR$/models/src/models/Store_has_model.java" />
+        <option value="$PROJECT_DIR$/models/src/models/List.java" />
+        <option value="$PROJECT_DIR$/models/src/models/ParseUtils.java" />
+        <option value="$PROJECT_DIR$/models/src/models/ServerQuery.java" />
+        <option value="$PROJECT_DIR$/models/src/models/SmartphoneModel.java" />
+        <option value="$PROJECT_DIR$/client/src/client/model_to_store_data_form/Controller.java" />
+        <option value="$PROJECT_DIR$/server/src/WorkerRunnable.java" />
+        <option value="$PROJECT_DIR$/client/src/client/main_form/form_main.fxml" />
+        <option value="$PROJECT_DIR$/models/src/models/Store.java" />
+        <option value="$PROJECT_DIR$/models/src/models/ModelToStore.java" />
         <option value="$PROJECT_DIR$/client/src/client/main_form/Controller.java" />
       </list>
     </option>
@@ -250,9 +163,151 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="2499" />
-    <option name="height" value="2134" />
+    <option name="y" value="215" />
+    <option name="width" value="2346" />
+    <option name="height" value="1941" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CollectionsScala</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness &gt; Messages</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Performance</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Security</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Usability</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Usability &gt; Icons</id>
+          </State>
+          <State>
+            <id>Android Lint for Kotlin</id>
+          </State>
+          <State>
+            <id>CDI(Contexts and Dependency Injection) issues</id>
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Code style issuesCSS</id>
+          </State>
+          <State>
+            <id>Code style issuesJava</id>
+          </State>
+          <State>
+            <id>Comparing CollectionsScala</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Declaration redundancyJava</id>
+          </State>
+          <State>
+            <id>Dependency issuesJava</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>GeneralScala</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>ImportsJava</id>
+          </State>
+          <State>
+            <id>Invalid elementsCSS</id>
+          </State>
+          <State>
+            <id>JBoss Seam issues</id>
+          </State>
+          <State>
+            <id>JSP Inspections</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java EE issues</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Javadoc issuesJava</id>
+          </State>
+          <State>
+            <id>Kotlin</id>
+          </State>
+          <State>
+            <id>Other CollectionsScala</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+          <State>
+            <id>Probable bugsCSS</id>
+          </State>
+          <State>
+            <id>Probable bugsJava</id>
+          </State>
+          <State>
+            <id>Properties Files</id>
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+          <State>
+            <id>Scala</id>
+          </State>
+          <State>
+            <id>Syntactic SimplificationScala</id>
+          </State>
+          <State>
+            <id>TestNGJava</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
+          </State>
+          <State>
+            <id>Thymeleaf</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -264,7 +319,7 @@
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />
-      <autoscrollFromSource />
+      <autoscrollFromSource ProjectPane="true" />
       <sortByType />
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
@@ -384,51 +439,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="secondary_data_form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="course_smartphones" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="processor_data_form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="course_smartphones" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manufacturer_data_form" />
+              <option name="myItemId" value="store_data_form" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,45 +465,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="course_smartphones" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data_form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="SQL Dialects" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/client/model_to_store_data_form" />
+      <recent name="$PROJECT_DIR$/client/src/client/store_data_form" />
       <recent name="$PROJECT_DIR$/models/src" />
     </key>
   </component>
@@ -884,6 +878,8 @@
       <setting name="testName" value="" />
       <setting name="testKind" value="Class" />
       <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
       <envs />
       <method />
     </configuration>
@@ -900,6 +896,8 @@
       <setting name="testName" value="" />
       <setting name="testKind" value="Class" />
       <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
       <envs />
       <method />
     </configuration>
@@ -949,7 +947,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -987,6 +985,8 @@
       <setting name="testName" value="" />
       <setting name="testKind" value="Class" />
       <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
       <envs />
       <method />
     </configuration>
@@ -1025,7 +1025,14 @@
       <workItem from="1488370311872" duration="11089000" />
       <workItem from="1488747598242" duration="597000" />
       <workItem from="1488799673585" duration="76000" />
-      <workItem from="1488836227661" duration="10568000" />
+      <workItem from="1488836227661" duration="10675000" />
+      <workItem from="1488848567309" duration="208000" />
+      <workItem from="1488922311256" duration="54000" />
+      <workItem from="1488922641367" duration="97000" />
+      <workItem from="1488937676015" duration="8000" />
+      <workItem from="1489015887915" duration="460000" />
+      <workItem from="1489076579303" duration="29464000" />
+      <workItem from="1489353633110" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="ccc">
       <created>1488166679500</created>
@@ -1048,34 +1055,39 @@
       <option name="project" value="LOCAL" />
       <updated>1488799743785</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="all inserts is working&#10;all deletes is working&#10;need to finish model editing, search&#10;need to create stores.">
+      <created>1488847550720</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1488847550720</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37534000" />
+    <option name="totallyTimeSpent" value="67943000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2499" height="2134" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="215" width="2346" height="1941" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20634921" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20634921" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20512821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21657985" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1086,7 +1098,9 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1121,7 +1135,8 @@
     <MESSAGE value="ccc" />
     <MESSAGE value="just&#10;i wanna sleep" />
     <MESSAGE value="last updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="last updates" />
+    <MESSAGE value="all inserts is working&#10;all deletes is working&#10;need to finish model editing, search&#10;need to create stores." />
+    <option name="LAST_COMMIT_MESSAGE" value="all inserts is working&#10;all deletes is working&#10;need to finish model editing, search&#10;need to create stores." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1133,20 +1148,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/client/model/ServerQuery.java" />
-    <entry file="file://$PROJECT_DIR$/client/src/client/Alerts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/model/BatteryType.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureMaterial.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/model/EnclosureType.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/model/Identifiable.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/model/List.java" />
     <entry file="file://$PROJECT_DIR$/server/src/model/Manufacturer.java" />
     <entry file="file://$PROJECT_DIR$/server/src/model/MemoryCardType.java" />
     <entry file="file://$PROJECT_DIR$/server/src/model/Model.java" />
@@ -1161,19 +1162,10 @@
     <entry file="file://$PROJECT_DIR$/server/src/model/SmartphoneModel.java" />
     <entry file="file://$PROJECT_DIR$/server/src/model/Standard.java" />
     <entry file="file://$PROJECT_DIR$/server/src/model/ServerQuery.java" />
-    <entry file="file://$PROJECT_DIR$/models/src/models/Store.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/src/models/Standard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,7 +1173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,7 +1180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1197,15 +1187,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1213,7 +1194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1221,7 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1229,7 +1208,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1237,7 +1215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1245,7 +1222,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1253,103 +1229,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/main_form/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/ParseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="180" column="35" lean-forward="false" selection-start-line="180" selection-start-column="35" selection-end-line="180" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/SmartphoneModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="99" column="48" lean-forward="false" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/ServerQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3277">
-          <caret line="122" column="79" lean-forward="true" selection-start-line="122" selection-start-column="79" selection-end-line="122" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/src/models/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/client/processor_data_form/form_data.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/client/manufacturer_data_form/form_data.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/secondary_data_form/form_data.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
-            <element signature="e#1255#1256#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/ServerTCP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1205">
-          <caret line="49" column="60" lean-forward="false" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/src/models/ServerResult.java">
@@ -1357,31 +1257,17 @@
         <state relative-caret-position="870">
           <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
           <folding>
-            <element signature="e#726#727#0" expanded="true" />
-            <element signature="e#782#783#0" expanded="true" />
-            <element signature="e#1042#1043#0" expanded="true" />
-            <element signature="e#1073#1074#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="48" column="53" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="48" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1780#1810#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#726#727#0" expanded="false" />
+            <element signature="e#782#783#0" expanded="false" />
+            <element signature="e#837#838#0" expanded="false" />
+            <element signature="e#885#886#0" expanded="false" />
+            <element signature="e#915#916#0" expanded="false" />
+            <element signature="e#945#946#0" expanded="false" />
+            <element signature="e#979#980#0" expanded="false" />
+            <element signature="e#1010#1011#0" expanded="false" />
+            <element signature="e#1042#1043#0" expanded="false" />
+            <element signature="e#1073#1074#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1390,51 +1276,231 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
           <caret line="370" column="11" lean-forward="false" selection-start-line="370" selection-start-column="11" selection-end-line="370" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/processor_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="32" column="9" lean-forward="false" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1235#1236#0" expanded="false" />
+            <element signature="e#1267#1268#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/secondary_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1073">
+          <caret line="47" column="53" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="47" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/data_form/form_data.fxml">
+    <entry file="file://$PROJECT_DIR$/client/src/client/secondary_data_form/form_data.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model_data_form/form_data.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="11" column="78" lean-forward="false" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="78" />
+        <state relative-caret-position="29">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/ServerTCP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1247">
+          <caret line="49" column="62" lean-forward="false" selection-start-line="49" selection-start-column="62" selection-end-line="49" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/117b43b7-1e74-48d0-8051-4cb1da7e7006/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-754">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/ServerQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2523">
+          <caret line="140" column="27" lean-forward="false" selection-start-line="140" selection-start-column="27" selection-end-line="140" selection-end-column="27" />
+          <folding>
+            <element signature="e#1203#1204#0" expanded="true" />
+            <element signature="e#1242#1243#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1073">
+          <caret line="363" column="14" lean-forward="true" selection-start-line="355" selection-start-column="12" selection-end-line="363" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model_to_store_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1255">
+          <caret line="149" column="86" lean-forward="false" selection-start-line="149" selection-start-column="86" selection-end-line="149" selection-end-column="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1665#1666#0" expanded="true" />
+            <element signature="e#1709#1710#0" expanded="true" />
+            <element signature="e#1978#2008#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/model_to_store_data_form/form_data.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/ParseUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/store_data_form/form_data.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="7" column="110" lean-forward="false" selection-start-line="7" selection-start-column="110" selection-end-line="7" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/SmartphoneModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="109" column="81" lean-forward="false" selection-start-line="109" selection-start-column="81" selection-end-line="109" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/main_form/form_main.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/manufacturer_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="48" column="53" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="48" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/main_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19778">
+          <caret line="712" column="49" lean-forward="false" selection-start-line="712" selection-start-column="49" selection-end-line="712" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/WorkerRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1439">
-          <caret line="240" column="28" lean-forward="false" selection-start-line="240" selection-start-column="28" selection-end-line="240" selection-end-column="28" />
+        <state relative-caret-position="506">
+          <caret line="136" column="58" lean-forward="false" selection-start-line="136" selection-start-column="58" selection-end-line="136" selection-end-column="58" />
           <folding>
-            <marker date="1488847312000" expanded="true" signature="4446:4545" ph="SELECT * FRO... missingValuemissingValue" />
-            <marker date="1488847312000" expanded="true" signature="8126:8167" ph="SELECT * FRO... missingValue" />
-            <marker date="1488847312000" expanded="true" signature="9261:9273" ph="DELETE FROM " />
-            <marker date="1488847312000" expanded="true" signature="9261:9299" ph="DELETE FROM " />
-            <marker date="1488847312000" expanded="true" signature="9261:9300" ph="DELETE FROM " />
+            <element signature="imports" expanded="true" />
+            <marker date="1489112711000" expanded="true" signature="4674:4705" ph="SELECT `stor... store_has_model" />
+            <marker date="1489112711000" expanded="true" signature="5052:5067" ph="SELECT * FRO... " />
+            <marker date="1489112711000" expanded="true" signature="5052:5081" ph="SELECT * FRO... missingValue" />
+            <marker date="1489112711000" expanded="true" signature="5052:5142" ph="SELECT * FRO... missingValuemissingValue" />
+            <marker date="1489112711000" expanded="true" signature="8938:8981" ph="SELECT * FRO... missingValue" />
+            <marker date="1489112711000" expanded="true" signature="10158:10170" ph="DELETE FROM " />
+            <marker date="1489112711000" expanded="true" signature="10158:10198" ph="DELETE FROM " />
+            <marker date="1489112711000" expanded="true" signature="10158:10199" ph="DELETE FROM " />
+            <marker date="1489112711000" expanded="true" signature="11566:11609" ph="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/data_form/Controller.java">
+    <entry file="file://$PROJECT_DIR$/models/src/models/List.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3061">
-          <caret line="666" column="17" lean-forward="false" selection-start-line="666" selection-start-column="17" selection-end-line="666" selection-end-column="17" />
+        <state relative-caret-position="515">
+          <caret line="57" column="16" lean-forward="false" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/src/models/Store.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
           <folding>
-            <element signature="e#9811#9812#0" expanded="true" />
-            <element signature="e#9848#9849#0" expanded="true" />
-            <element signature="e#34195#34225#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/client/main_form/Controller.java">
+    <entry file="file://$PROJECT_DIR$/models/src/models/ModelToStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        <state relative-caret-position="377">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/store_data_form/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="927">
+          <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/client/main_form/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="69" column="9" lean-forward="false" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
           <folding />
         </state>
       </provider>

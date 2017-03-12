@@ -1,135 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.main_form.Controller">
-   <children>
-      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <TableView fx:id="table" VBox.vgrow="ALWAYS">
-              <columns>
+<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="560.0" prefWidth="1050.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/8" fx:controller="client.main_form.Controller">
+   <Tab text="Смартфони">
+      <AnchorPane>
+         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="modelTable" VBox.vgrow="ALWAYS">
+               <columns>
                   <TableColumn prefWidth="43.0" text="id" visible="false">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="id" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="manufacturer" prefWidth="119.0" text="Виробник" />
                   <TableColumn prefWidth="75.0" text="Модель">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="name" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="standard" prefWidth="75.0" text="Стандарт зв'язку" />
                   <TableColumn fx:id="os" prefWidth="75.0" text="ОС" />
                   <TableColumn prefWidth="75.0" text="Версія ОС">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="os_version" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="enclosure_type" prefWidth="75.0" text="Тип" />
                   <TableColumn fx:id="enclosure_material" prefWidth="75.0" text="Матеріал" />
                   <TableColumn prefWidth="75.0" text="Кількість SIM">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="sim_card_amount" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="sim_type" prefWidth="75.0" text="Тип SIM" />
                   <TableColumn prefWidth="75.0" text="Товщина (мм)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="thickness" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Вага (г)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="weight" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Колір">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="color" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="screen_type" prefWidth="75.0" text="Тип екрану" />
                   <TableColumn prefWidth="75.0" text="Діагональ екрану (&quot;)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="screen_diagonal" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Роздільна здатність екрану">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="screen_resolution" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="battery_type" prefWidth="75.0" text="Тип акумульторної батареї" />
                   <TableColumn prefWidth="75.0" text="Ємність акумулятора (мАг)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="battery_capacity" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Обсяг оперативної пам'яті (МВ)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="ram" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Обсяг внутрішньої пам'яті (МВ)">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="internal_storage" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn fx:id="memory_card_type" prefWidth="75.0" text="Тип карти пам'яті" />
                   <TableColumn fx:id="processor" prefWidth="75.0" text="Процесор" />
                   <TableColumn prefWidth="75.0" text="Wi-Fi">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="wifi" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="48.0" text="NFC">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="nfs" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="115.0" text="Bluetooth">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="bluetooth" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Основна камера">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="camera" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn prefWidth="75.0" text="Передня камера">
-                      <cellValueFactory>
+                     <cellValueFactory>
                         <PropertyValueFactory property="frontal_camera" />
                      </cellValueFactory>
                   </TableColumn>
-              </columns>
+               </columns>
             </TableView>
-          <AnchorPane minHeight="0.0" minWidth="0.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+               <HBox alignment="CENTER" spacing="24" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onMouseClickAddModel" text="Додати" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickEditModel" text="Редагувати" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteModel" text="Видалити" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickSearchModels" prefHeight="27.0" prefWidth="238.0" text="Пошук" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickRefreshModels" prefHeight="27.0" prefWidth="123.0" text="Оновити" />
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
-               <children>
-                  <HBox spacing="24" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onMouseClickAdd" text="Додати" />
-                        <Button mnemonicParsing="false" onMouseClicked="#onMouseClickEdit" text="Редагувати" />
-                        <Button mnemonicParsing="false" onMouseClicked="#onMouseClickDelete" text="Видалити" />
-                        <Button mnemonicParsing="false" onMouseClicked="#onMouseClickSearch" prefHeight="27.0" prefWidth="238.0" text="Пошук" />
-                        <Button fx:id="refresh" mnemonicParsing="false" onMouseClicked="#onMouseClickRefresh" prefHeight="27.0" prefWidth="123.0" text="Оновити" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </children>
             </AnchorPane>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-   </children>
-</AnchorPane>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
+         </VBox>
+      </AnchorPane>
+   </Tab>
+   <Tab text="Магазини">
+      <AnchorPane>
+         <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView VBox.vgrow="ALWAYS" fx:id="storeTable">
+               <columns>
+                  <TableColumn prefWidth="210.0" text="Назва">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="name" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="167.0" text="Інтернет-адреса">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="link" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="price" prefWidth="167.0" text="Ціна" />
+               </columns>
+            </TableView>
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+               <HBox alignment="CENTER" spacing="24" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onMouseClickAddStore" text="Додати" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickEditStore" text="Редагувати" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteStore" text="Видалити" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickRefreshStores" prefHeight="27.0" prefWidth="123.0" text="Оновити" />
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </AnchorPane>
+         </VBox>
+      </AnchorPane>
+   </Tab>
+</TabPane>

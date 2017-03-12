@@ -8,6 +8,7 @@ import java.sql.SQLException;
  */
 public class Store extends Owner {
     public String link = null;
+    private ModelToStore modelToStore = null;
     @SuppressWarnings("unused")
     public Store() {}
 
@@ -22,5 +23,17 @@ public class Store extends Owner {
             link = from.getString("link");
         } catch (SQLException ignored) {}
         return this;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public ModelToStore getModelToStore() {
+        return modelToStore;
+    }
+
+    public void setModelToStore(ModelToStore modelToStore) {
+        this.modelToStore = modelToStore;
     }
 }

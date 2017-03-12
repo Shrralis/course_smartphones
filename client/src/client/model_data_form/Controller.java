@@ -1,4 +1,4 @@
-package client.data_form;
+package client.model_data_form;
 
 import client.Alerts;
 import javafx.collections.FXCollections;
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Optional;
 
 /**
@@ -188,8 +189,7 @@ public class Controller {
     @SuppressWarnings("unchecked")
     @FXML
     public void initialize() {
-        for (Field field :
-                getClass().getDeclaredFields()) {
+        for (Field field : getClass().getDeclaredFields()) {
             if (field.getType().getSimpleName().equals("ComboBox") && !field.getName().equals("color")) {
                 try {
                     ComboBox comboBox = (ComboBox) field.get(this);
@@ -221,7 +221,6 @@ public class Controller {
                                             comboBox.getSelectionModel().clearSelection();
                                         }
                                     } catch (IOException | ClassNotFoundException ignored) {}
-                                    return;
                                 }
                             }
                         }
@@ -287,8 +286,7 @@ public class Controller {
                 Alerts.showBadOutputStreamAlert();
             }
 
-            for (Field field :
-                    this.getClass().getDeclaredFields()) {
+            for (Field field : this.getClass().getDeclaredFields()) {
                 if (field.getName().equalsIgnoreCase(tableName)) {
                     ((ComboBox) field.get(this)).setItems(list);
                     addObjForCreate(clazz);
@@ -316,13 +314,10 @@ public class Controller {
                         if (newValue != null && ((T) newValue).getName() != null) {
                             if (((T) newValue).getName().equalsIgnoreCase("створити...")) {
                                 if (fieldName.matches("(p|P)rocessor")) {
-                                    System.out.println("Here you should add window for adding new processor data to db.");
                                     openProcessorAddForm((Processor) newValue);
                                 } else if (fieldName.matches("(m|M)anufacturer")) {
-                                    System.out.println("Here you should add window for adding new manufacturer data to db.");
                                     openManufacturerAddForm((Manufacturer) newValue);
                                 } else {
-                                    System.out.println("Here you should add window for adding new secondary data to db.");
                                     openSecondaryDataAddForm((T) newValue);
                                 }
                                 addObjForCreate(clazz);
@@ -345,16 +340,19 @@ public class Controller {
     }
 
     public void setFormType(FormType formType) {
+        final OnOkButtonClickListener currentListener = onOkButtonClickListener;
+
         if (formType == FormType.Search) {
             setAllFieldsDisabled();
 
             onOkButtonClickListener = () -> {
                 if (isFieldsValidForSearch()) {
-
+                    if (currentListener != null) {
+                        currentListener.onButtonOkClick();
+                    }
                 }
             };
-        } else if (formType == FormType.Add) {
-            final OnOkButtonClickListener currentListener = onOkButtonClickListener;
+        } else {
             onOkButtonClickListener = () -> {
                 if (isFieldsValidForAdd()) {
                     setupModel();
@@ -364,10 +362,10 @@ public class Controller {
                     }
                 }
             };
-        } else {
-            onOkButtonClickListener = () -> {
 
-            };
+            if (formType == FormType.Edit) {
+                setupFormBasedOnModel();
+            }
         }
     }
 
@@ -664,16 +662,41 @@ public class Controller {
     }
 
     private void setupModel() {
+        final SmartphoneModel oldModel = modelToProcess;
         modelToProcess = new SmartphoneModel();
 
+        if (oldModel != null) {
+            modelToProcess.id = oldModel.getId();
+        }
+
         try {
-            modelToProcess.sim_card_amount = Integer.parseInt(simAmount.getText().trim());
-            modelToProcess.thickness = Double.parseDouble(thickness.getText().trim());
-            modelToProcess.weight = Double.parseDouble(weight.getText().trim());
-            modelToProcess.screen_diagonal = Double.parseDouble(screenDiagonal.getText().trim());
-            modelToProcess.battery_capacity = Integer.parseInt(batteryCapacity.getText().trim());
-            modelToProcess.ram = Integer.parseInt(ram.getText().trim());
-            modelToProcess.internal_storage = Integer.parseInt(internalStorage.getText().trim());
+            if (!simAmount.getText().trim().equals("")) {
+                modelToProcess.sim_card_amount = Integer.parseInt(simAmount.getText().trim());
+            }
+
+            if (!thickness.getText().trim().equals("")) {
+                modelToProcess.thickness = Double.parseDouble(thickness.getText().trim());
+            }
+
+            if (!weight.getText().trim().equals("")) {
+                modelToProcess.weight = Double.parseDouble(weight.getText().trim());
+            }
+
+            if (!screenDiagonal.getText().trim().equals("")) {
+                modelToProcess.screen_diagonal = Double.parseDouble(screenDiagonal.getText().trim());
+            }
+
+            if (!batteryCapacity.getText().trim().equals("")) {
+                modelToProcess.battery_capacity = Integer.parseInt(batteryCapacity.getText().trim());
+            }
+
+            if (!ram.getText().trim().equals("")) {
+                modelToProcess.ram = Integer.parseInt(ram.getText().trim());
+            }
+
+            if (!internalStorage.getText().trim().equals("")) {
+                modelToProcess.internal_storage = Integer.parseInt(internalStorage.getText().trim());
+            }
         } catch (NumberFormatException ignored) {
             ignored.printStackTrace();
         } finally {
@@ -697,6 +720,69 @@ public class Controller {
             modelToProcess.camera = camera.getText().trim();
             modelToProcess.frontal_camera = frontalCamera.getText().trim();
         }
+    }
+
+    public HashMap<String, Object> getParamsForSearch() throws IllegalAccessException {
+        HashMap<String, Object> paramsForSearch = new HashMap<>();
+
+        for (Field field : getClass().getDeclaredFields()) {
+            if (field.getName().matches("^b(\\s|\\S)*$")) {
+                if (field.getType() == CheckBox.class) {
+                    if (((CheckBox) field.get(this)).isSelected()) {
+                        String neededFieldName = field.getName().substring(1).toLowerCase();
+
+                        for (Field field2 : getClass().getDeclaredFields()) {
+                            if (field2.getName().equalsIgnoreCase(neededFieldName)) {
+                                if (field2.getType() == ComboBox.class && !field2.getName().equalsIgnoreCase("color")
+                                        && !field2.getName().equalsIgnoreCase("model")) {
+                                    System.out.println(neededFieldName + " = " + ((Owner) ((ComboBox) field2.get(this)).getSelectionModel().getSelectedItem()).getId());
+                                    paramsForSearch.put(neededFieldName, ((Owner) ((ComboBox) field2.get(this)).getSelectionModel().getSelectedItem()).getId());
+                                } else if (neededFieldName.equalsIgnoreCase("color")) {
+                                    System.out.println(neededFieldName + " = " + ((ComboBox) field2.get(this)).getSelectionModel().getSelectedItem());
+                                    paramsForSearch.put(neededFieldName, ((ComboBox) field2.get(this)).getSelectionModel().getSelectedItem());
+                                } else {
+                                    if (neededFieldName.equalsIgnoreCase("model")) {
+                                        neededFieldName = "name";
+                                    }
+                                    System.out.println(neededFieldName + " = " + ((TextField) field2.get(this)).getText());
+                                    paramsForSearch.put(neededFieldName, ((TextField) field2.get(this)).getText());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return paramsForSearch;
+    }
+
+    private void setupFormBasedOnModel() {
+        simAmount.setText(modelToProcess.getSim_card_amount() + "");
+        thickness.setText(modelToProcess.getThickness() + "");
+        weight.setText(modelToProcess.getWeight() + "");
+        screenDiagonal.setText(modelToProcess.getScreen_diagonal() + "");
+        batteryCapacity.setText(modelToProcess.getBattery_capacity() + "");
+        ram.setText(modelToProcess.getRam() + "");
+        internalStorage.setText(modelToProcess.getInternal_storage() + "");
+        manufacturer.getSelectionModel().select(modelToProcess.getManufacturer());
+        model.setText(modelToProcess.getName());
+        standard.getSelectionModel().select(modelToProcess.getStandard());
+        os.getSelectionModel().select(modelToProcess.getOs());
+        osVersion.setText(modelToProcess.getOs_version());
+        enclosureType.getSelectionModel().select(modelToProcess.getEnclosure_type());
+        enclosureMaterial.getSelectionModel().select(modelToProcess.getEnclosure_material());
+        simCardType.getSelectionModel().select(modelToProcess.getSim_card_type());
+        color.getSelectionModel().select(modelToProcess.getColor());
+        screenType.getSelectionModel().select(modelToProcess.getScreen_type());
+        screenResolution.setText(modelToProcess.getScreen_resolution());
+        batteryType.getSelectionModel().select(modelToProcess.getBattery_type());
+        memoryCardType.getSelectionModel().select(modelToProcess.getMemory_card_type());
+        processor.getSelectionModel().select(modelToProcess.getProcessor());
+        wifi.setText(modelToProcess.getWifi());
+        nfc.setSelected(modelToProcess.isNfc());
+        bluetooth.setText(modelToProcess.getBluetooth());
+        camera.setText(modelToProcess.getCamera());
+        frontalCamera.setText(modelToProcess.getFrontal_camera());
     }
 
     private void openProcessorAddForm(Processor resultTo) {
