@@ -34,9 +34,7 @@ public class ModelToStore extends Owner {
                     + from.getInt("store"), connection));
             model = from.getInt("model");
             price = from.getDouble("price");
-        } catch (SQLException ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (SQLException ignored) {}
         return this;
     }
 

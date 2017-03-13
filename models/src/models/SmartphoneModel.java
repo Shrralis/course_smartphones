@@ -57,7 +57,6 @@ public class SmartphoneModel extends Owner {
     public String camera = null;
 
     public String frontal_camera = null;
-
     @SuppressWarnings("unused")
     public SmartphoneModel() {}
     @Override
@@ -100,9 +99,7 @@ public class SmartphoneModel extends Owner {
             bluetooth = from.getString("bluetooth");
             camera = from.getString("camera");
             frontal_camera = from.getString("frontal_camera");
-        } catch (SQLException ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (SQLException ignored) {}
         return this;
     }
 
