@@ -1,10 +1,12 @@
 import models.*;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.sql.*;
+import java.util.Calendar;
 
 /**
  * Created by shrralis on 2/19/17.
@@ -78,6 +80,10 @@ public class WorkerRunnable implements Runnable {
 
             if (method.equalsIgnoreCase("edit")) {
                 return edit(query);
+            }
+
+            if (method.equalsIgnoreCase("exportToExcel")) {
+                return exportToExcel(query);
             }
         }
         return null;
@@ -305,9 +311,72 @@ public class WorkerRunnable implements Runnable {
             if (connection != null) {
                 connection.close();
             }
-        } catch (SQLException | IllegalAccessException ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (SQLException | IllegalAccessException ignored) {}
+        return result;
+    }
+
+    private ServerResult exportToExcel(ServerQuery query) {
+        ServerResult result = null;
+        XSSFWorkbook workbook = null;
+
+        try {
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+                Statement statement2 = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+                ResultSet resultSet = statement.executeQuery("SHOW TABLES;");
+                workbook = new XSSFWorkbook();
+
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String tableName = resultSet.getString(1);
+                    XSSFSheet sheet = workbook.createSheet(tableName);
+                    ResultSet rs = statement2.executeQuery("SELECT * FROM `" + tableName + "`;");
+                    XSSFRow header = sheet.createRow(0);
+                    int columnCount = rs.getMetaData().getColumnCount(),
+                            rows = 1;
+
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = rs.getMetaData().getColumnName(i);
+
+                        header.createCell(i - 1).setCellValue(columnName);
+                    }
+                    rs.beforeFirst();
+
+                    while (rs.next()) {
+                        XSSFRow row = sheet.createRow(rows++);
+
+                        for (int i = 1; i <= columnCount; i++) {
+                            row.createCell(i - 1).setCellValue(rs.getString(i));
+                        }
+                    }
+                }
+            }
+
+            File file = new File("exported_" + Calendar.getInstance().getTimeInMillis() + ".xlsx");
+
+            file.createNewFile();
+
+            FileOutputStream fos = new FileOutputStream(file);
+            FileInputStream fis = new FileInputStream(file);
+
+            workbook.write(fos);
+            fos.close();
+            workbook.close();
+
+            byte[] bytes = new byte[16 * 1024];
+            int count;
+
+            while ((count = fis.read(bytes)) > 0) {
+                outputStream.write(bytes, 0, count);
+            }
+            fis.close();
+            file.delete();
+
+            result = ServerResult.create(0, "success");
+        } catch (IOException | SQLException ignored) {}
         return result;
     }
 }

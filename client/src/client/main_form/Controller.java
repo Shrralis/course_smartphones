@@ -11,16 +11,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import models.List;
 import models.*;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.awt.*;
+import java.io.*;
+import java.util.Calendar;
 import java.util.HashMap;
 
 /**
@@ -137,6 +139,31 @@ public class Controller {
         getAllStores();
     }
     @FXML
+    protected void onMouseClickExportToExcel() {
+        try {
+            outputStream.writeObject(ServerQuery.create("models", "exportToExcel", new Owner(), null));
+
+            String fileName = "exported_" + Calendar.getInstance().getTimeInMillis() + ".xlsx";
+            FileOutputStream fos = new FileOutputStream(fileName);
+            byte[] bytes = new byte[16 * 1024];
+            int count;
+
+            while ((count = inputStream.read(bytes)) > 0) {
+                fos.write(bytes, 0, count);
+            }
+            fos.close();
+
+            File xlsx = new File(fileName);
+
+            if (((ServerResult) inputStream.readObject()).getResult() == 0) {
+                Desktop.getDesktop().open(xlsx);
+            } else {
+                xlsx.delete();
+                System.err.println("Some error with exporting to Excel!");
+            }
+        } catch (IOException | ClassNotFoundException ignored) {}
+    }
+    @FXML
     public void initialize() {
         manufacturer.setCellValueFactory(param -> {
             if (param.getValue() != null && param.getValue().getManufacturer() != null) {
@@ -235,7 +262,7 @@ public class Controller {
                             .then((ContextMenu) null)
                             .otherwise(contextMenu)
             );
-            return row ;
+            return row;
         });
     }
 
